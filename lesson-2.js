@@ -74,3 +74,25 @@ switch(o) {
     default:
         document.write('Введите число от 0 до 15');
 }
+
+//exersise #5
+
+var firstNumber;
+var secondNumber;
+var result;
+
+function addition(firstNumber, secondNumber) {
+    return result = firstNumber + secondNumber;
+}
+
+function subtraction(firstNumber, secondNumber) {
+    return result = firstNumber - secondNumber;
+}
+
+function multiplication(firstNumber, secondNumber) {
+    return result = firstNumber * secondNumber;
+}
+
+function division(firstNumber, secondNumber) {
+    return result = firstNumber / secondNumber;
+}
