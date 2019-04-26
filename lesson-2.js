@@ -17,10 +17,6 @@ console.log(x);    // 5
 
 //exersise #3
 
-var h;
-var m;
-var result;
-
 function comparison(h,m) {
     if (h >= 0 && m >= 0) {
         return result = h-m;
@@ -77,12 +73,8 @@ switch(o) {
 
 //exersise #5
 
-var firstNumber;
-var secondNumber;
-var result;
-
-function addition(firstNumber, secondNumber) {
-    return result = firstNumber + secondNumber;
+function addition(arg1, arg2) {
+    return result = arg1 + arg2;
 }
 
 function subtraction(firstNumber, secondNumber) {
@@ -95,4 +87,19 @@ function multiplication(firstNumber, secondNumber) {
 
 function division(firstNumber, secondNumber) {
     return result = firstNumber / secondNumber;
+}
+
+//exersise #6
+
+function mathOperation(arg1, arg2, operation) {
+    switch(operation) {
+        case addition:
+            return result = arg1 + arg2;
+        case subtraction:
+            return result = arg1 - arg2;
+        case multiplication:
+            return result = arg1 * arg2;
+        case division:
+            return result = arg1 / arg2;
+    }
 }
