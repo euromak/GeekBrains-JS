@@ -1,3 +1,5 @@
+
+
 // exersise #1
 
 var a = 1, b = 1, c, d;
@@ -6,14 +8,14 @@ c = ++a;           // 2 возвращает увеличенное значен
 d = b++;           // 1 возвращает значение до увеличения
 c = (2+ ++a);      // 5 т.к. в a было уже '2' увеличивает это значение на 1 и прибавляет 2
 d = (2+ b++);      // 4 т.к. в b было уже '2' возвращает старое значение и прибавляет 2
-console.log(a);    // 3 значение после двух увеличений
-console.log(b);    // 3 значение после двух увеличений
+console.log("c = " + a);    // 3 значение после двух увеличений
+console.log("b = " +  b);    // 3 значение после двух увеличений
 
 // exersise #2
 
 var f = 2;
 var x = 1 + (f*= 2);
-console.log(x);    // 5
+console.log("x = " + x);    // 5
 
 //exersise #3
 
@@ -21,19 +23,25 @@ function comparison(h,m) {
     if (h >= 0 && m >= 0) {
         return result = h-m;
     }
-    else if(+h < 0 && +m < 0) {
+    else if(h < 0 && m < 0) {
         return result = h * m;
     }
     else if ((h < 0 && m > 0)||(h > 0 && m < 0)){
         return result = h + m;
     }
 }
+console.log(comparison(4,4));
+console.log(comparison(-4,-4));
+console.log(comparison(4,-4));
+console.log(comparison(-4,10));
 
 //exersise #4
 
-var o = 11;
+var o = 0;
 
 switch(o) {
+    case 0:
+        document.write('0');
     case 1:
         document.write('1');
     case 2:
@@ -46,8 +54,6 @@ switch(o) {
         document.write('5');
     case 6:
         document.write('6');
-    case 7:
-        document.write('7');
     case 7:
         document.write('7');
     case 8:
@@ -77,16 +83,16 @@ function addition(arg1, arg2) {
     return result = arg1 + arg2;
 }
 
-function subtraction(firstNumber, secondNumber) {
-    return result = firstNumber - secondNumber;
+function subtraction(arg1, arg2) {
+    return result = arg1 - arg2;
 }
 
-function multiplication(firstNumber, secondNumber) {
-    return result = firstNumber * secondNumber;
+function multiplication(arg1, arg2) {
+    return result = arg1 * arg2;
 }
 
-function division(firstNumber, secondNumber) {
-    return result = firstNumber / secondNumber;
+function division(arg1, arg2) {
+    return result = arg1 / arg2;
 }
 
 //exersise #6
@@ -94,12 +100,28 @@ function division(firstNumber, secondNumber) {
 function mathOperation(arg1, arg2, operation) {
     switch(operation) {
         case addition:
-            return result = arg1 + arg2;
+            result = addition(arg1, arg2);
+            break;
         case subtraction:
-            return result = arg1 - arg2;
+            result = subtraction(arg1, arg2);
+            break;
         case multiplication:
-            return result = arg1 * arg2;
+            result = multiplication(arg1, arg2);
+            break;
         case division:
-            return result = arg1 / arg2;
+            result = division(arg1, arg2);
+            break;
+        default:
+            result = console.log('Введите в качестве 3 аргумента одну из основных математических операций addition/subtraction/multiplication/division');
+            break;
     }
+    return result;
 }
+
+//exersise #7
+
+var zero = null;
+var q = 0;
+
+console.log(zero==q); // false т.к. переменная zero ничего не содержит(очищена)
+
