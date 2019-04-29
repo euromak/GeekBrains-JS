@@ -9,7 +9,7 @@ function randomNumber() {
 function beginGame() {
     var begin = confirm('Сыграем в игру?');
 
-    if(begin==true){
+    if(begin == true){
         randomNumber();
         game();
     }
@@ -19,12 +19,12 @@ function game() {
     while(true) {
         var answer = prompt('Введите загаданное 4-х значное число');
 
-        if(answer==randomNumber) {
+        if(answer == randomNumber) {
             alert("Поздравляем! Вы угадали число.");
             beginGame();
             break;
         }
-        else if(answer==null){
+        else if(answer == null){
             break;
         }
         else {

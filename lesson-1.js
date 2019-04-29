@@ -2,7 +2,7 @@
 
 //exersise #1
 let tc = prompt('Enter air temperature Celsius..');
-let tf = (9/5)*tc+32;
+let tf = (9 / 5) * tc + 32;
 alert('The temperature convert Fahrenheit - ' + tf + " F");
 
 //exersise #2
