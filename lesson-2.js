@@ -26,7 +26,7 @@ function comparison(h,m) {
     else if(h < 0 && m < 0) {
         return result = h * m;
     }
-    else if ((h < 0 && m > 0)||(h > 0 && m < 0)){
+    else {
         return result = h + m;
     }
 }
