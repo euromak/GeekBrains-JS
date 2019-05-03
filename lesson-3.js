@@ -56,9 +56,21 @@ function countBasketPrice() {
         total += cart[i][3];
     }
 
-    return console.log('Общая стоимость корзины ' + total + ' руб');
+    var result = console.log('Общая стоимость корзины ' + total + ' руб');
+
+    return result;
 }
 
 // exersise # 4
 
 for(var i = 0; i < 10; console.log(i++)) {}
+
+// exersise # 5
+
+var x = '';
+
+for(i = 0; i < 20; i++) {
+    x += 'x';
+    console.log(x);
+}
+
