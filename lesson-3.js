@@ -16,7 +16,49 @@ while(i < 100) {
     i++;
 }
 
-//exersise # 4
+// exersise # 2 and 3
+
+var product1 = ['футболка', 'nike', 'муж', 3000];
+var product2 = ['майка', 'reebok', 'жен', 3500];
+var product3  = ['толстовка', 'reebok', 'жен', 5000];
+var cart = [];
+
+// добавляем продукт в корзину
+
+function addToCart(item) {
+
+   if(cart.includes(item)) {
+       alert('В корзине есть этот товар');
+       return cart;
+   }
+   else {
+       cart.push(item);
+       alert(item[0] + ' добавлена в корзину');
+       return cart;
+   }
+
+}
+
+// удаляем продукт из корзины
+
+function removeCart(item) {
+    cart.pop(item);
+    alert('Товар удален из корзины' + '\n' + 'В корзине: ' + cart.length + ' товар(а)');
+    return cart;
+}
+
+// подсчет суммы корзины
+
+function countBasketPrice() {
+    var total = 0;
+
+    for(i=0; i < cart.length; i++) {
+        total += cart[i][3];
+    }
+
+    return console.log('Общая стоимость корзины ' + total + ' руб');
+}
+
+// exersise # 4
 
 for(var i = 0; i < 10; console.log(i++)) {}
-
