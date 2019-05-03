@@ -9,8 +9,14 @@ var arr = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 6
 
 while(i < 100) {
 
+    if(i / arr[i]) {
+        console.log(arr[i]);
+    }
+
     i++;
 }
 
+//exersise # 4
 
+for(var i = 0; i < 10; console.log(i++)) {}
 
