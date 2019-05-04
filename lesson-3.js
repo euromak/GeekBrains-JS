@@ -1,19 +1,37 @@
 // exersise #1
 
-/*
-2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97
- */
+// заполняем массив целыми числами от 2 до 100
+var arr = [];
 
-var i = 0;
-var arr = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97];
+for (var i = 2; i < 100; i++) {
+    arr[i] = true;
+}
 
-while(i < 100) {
+// объявляем переменную с первым простым числом
+var p = 2;
 
-    if(i / arr[i]) {
-        console.log(arr[i]);
+do {
+    // обозначаем составные числа - false
+    for (i = 2 * p; i < 100; i += p) {
+        arr[i] = false;
     }
 
-    i++;
+    for (i = p + 1; i < 100; i++) {
+        if (arr[i]) break;
+    }
+
+    p = i;
+} while (p * p < 100);
+
+var j = 0;
+
+// выводим простые числа
+while(j < arr.length) {
+    j++;
+
+    if(arr[j] === true) {
+        console.log(j);
+    }
 }
 
 // exersise # 2 and 3
@@ -25,9 +43,9 @@ var cart = [];
 
 // добавляем продукт в корзину
 
-function addToCart(item) {
+function addToCart(item){
 
-   if(cart.includes(item)) {
+   if(cart.includes(item)){
        alert('В корзине есть этот товар');
        return cart;
    }
@@ -41,18 +59,20 @@ function addToCart(item) {
 
 // удаляем продукт из корзины
 
-function removeCart(item) {
+function removeCart(item){
     cart.pop(item);
+
     alert('Товар удален из корзины' + '\n' + 'В корзине: ' + cart.length + ' товар(а)');
+
     return cart;
 }
 
 // подсчет суммы корзины
 
-function countBasketPrice() {
+function countBasketPrice(){
     var total = 0;
 
-    for(i=0; i < cart.length; i++) {
+    for(i=0; i < cart.length; i++){
         total += cart[i][3];
     }
 
@@ -63,14 +83,15 @@ function countBasketPrice() {
 
 // exersise # 4
 
-for(var i = 0; i < 10; console.log(i++)) {}
+for(var i = 0; i < 10; console.log(i++)){}
 
 // exersise # 5
 
 var x = '';
 
-for(i = 0; i < 20; i++) {
+for(i = 0; i < 20; i++){
     x += 'x';
+
     console.log(x);
 }
 
