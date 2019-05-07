@@ -72,7 +72,7 @@ function removeCart(item){
 function countBasketPrice(){
     var total = 0;
 
-    for(i=0; i < cart.length; i++){
+    for(i = 0; i < cart.length; i++){
         total += cart[i][3];
     }
 
