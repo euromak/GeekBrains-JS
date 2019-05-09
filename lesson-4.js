@@ -1,10 +1,13 @@
+// EXERSISE # 1
 var number = prompt('Введите число от 0 до 999');
 
-var objectNumber = {};
+
 
 function convert(number){
     var i;
+    var objectNumber = {};
 
+// Проверка вхождения числа в ряд заданных чисел
     if(number > 999 || number < 0){
         alert('Вы ввели неверное число');
         return objectNumber;
@@ -14,6 +17,10 @@ function convert(number){
         return number;
     }
 
+/*
+Определяем кол-во символов в полученной строке и создаем ветки в зависимости от кол-ва символов.
+В каждой ветке обращаемся к символу, преобразуем его в числовой тип данных и добавляем свойство со значением в объект.
+*/
     for(i = 0; i < number.length; i++){
         switch(number.length){
             case 1:
@@ -37,7 +44,8 @@ function convert(number){
 
     }
 
-    return alert(objectNumber + ' = ' + objectNumber.hundreds + '' + objectNumber.decades + '' + objectNumber.units);
+    return objectNumber;
 }
 
 convert(number);
+
