@@ -1,5 +1,5 @@
 // EXERSISE # 1
-
+/*
 var number = prompt('Введите число от 0 до 999');
 
 
@@ -21,7 +21,7 @@ function convert(number){
 /*
 Определяем кол-во символов в полученной строке и создаем ветки в зависимости от кол-ва символов.
 В каждой ветке обращаемся к символу, преобразуем его в числовой тип данных и добавляем свойство со значением в объект.
-*/
+
     for(i = 0; i < number.length; i++){
         switch(number.length){
             case 1:
@@ -49,7 +49,7 @@ function convert(number){
 }
 
 convert(number);
-
+*/
 
 // EXERSISE # 2
 
@@ -197,24 +197,32 @@ var cart = {
     add: function(){
         var basket = this.basket;
         var products = this.products;
+        var i;
+        var answer = cart.showCatalog();
     // товар добавляется последовательно 1,2,3...
-        for(var i = 0; i < products.length; i++){
-            var answer = cart.showCatalog();
+
+        for(i = 0; i < products.length; i++){
             // проверка ответа пользователя со значениями продуктов
-            if(+answer === products[i].article || answer === products[i].name){
+            if(answer == products[i].article){
                 basket.push(products[i]);
                 this.priceTotal += products[i].price;
                 this.quantity++;
                 alert("Добавлен товар: \n" + cart.products[i].name + " - " + cart.products[i].price + " руб." + '\n\n' + "Ваша корзина: \n" + "Кол-во - " + this.quantity + "\n" + "Общая стоимость - " + this.priceTotal + " руб");
+                break;
             }
             else if(answer == null){
                 break;
             }
-            else{
-                alert("Ваша корзина: \n" + "Кол-во - " + this.quantity + "\n" + "Общая стоимость - " + this.priceTotal + " руб");
-            }
         }
 
+        var message = confirm("Продолжить покупки?");
+
+        if(message == true){
+            this.add();
+        }
+        else{
+            alert("Ваша корзина: \n" + "Кол-во - " + this.quantity + "\n" + "Общая стоимость - " + this.priceTotal + " руб")
+        }
 
         return basket;
     },
