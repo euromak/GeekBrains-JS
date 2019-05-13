@@ -1,5 +1,5 @@
 // EXERSISE # 1
-/*
+
 var number = prompt('Введите число от 0 до 999');
 
 
@@ -17,11 +17,11 @@ function convert(number){
         alert('Ввод отменен');
         return number;
     }
-*/
+
 /*
 Определяем кол-во символов в полученной строке и создаем ветки в зависимости от кол-ва символов.
 В каждой ветке обращаемся к символу, преобразуем его в числовой тип данных и добавляем свойство со значением в объект.
-
+*/
     for(i = 0; i < number.length; i++){
         switch(number.length){
             case 1:
@@ -44,12 +44,12 @@ function convert(number){
         }
 
     }
-
+    console.log(objectNumber);
     return objectNumber;
 }
 
 convert(number);
-*/
+
 
 // EXERSISE # 2
 
@@ -197,7 +197,7 @@ var cart = {
     add: function(){
         var basket = this.basket;
         var products = this.products;
-
+    // товар добавляется последовательно 1,2,3...
         for(var i = 0; i < products.length; i++){
             var answer = cart.showCatalog();
             // проверка ответа пользователя со значениями продуктов
@@ -206,18 +206,19 @@ var cart = {
                 this.priceTotal += products[i].price;
                 this.quantity++;
                 alert("Добавлен товар: \n" + cart.products[i].name + " - " + cart.products[i].price + " руб." + '\n\n' + "Ваша корзина: \n" + "Кол-во - " + this.quantity + "\n" + "Общая стоимость - " + this.priceTotal + " руб");
-
+            }
+            else if(answer == null){
+                break;
             }
             else{
                 alert("Ваша корзина: \n" + "Кол-во - " + this.quantity + "\n" + "Общая стоимость - " + this.priceTotal + " руб");
-                break;
             }
         }
 
 
         return basket;
     },
-    delele: function(){},
+    delete: function(){},
     amount: function(){
         var basket = this.basket;
 
