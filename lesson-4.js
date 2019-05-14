@@ -199,10 +199,9 @@ var cart = {
         var products = this.products;
         var i;
         var answer = cart.showCatalog();
-    // товар добавляется последовательно 1,2,3...
 
         for(i = 0; i < products.length; i++){
-            // проверка ответа пользователя со значениями продуктов
+
             if(answer == products[i].article || answer === products[i].name){
                 basket.push(products[i]);
                 this.priceTotal += products[i].price;
@@ -226,7 +225,16 @@ var cart = {
 
         return basket;
     },
-    delete: function(){},
+    delete: function(){
+        var deleteBaslek = confirm("Очистить корзину?");
+
+        if(deleteBaslek == true){
+            this.basket.length = 0;
+            alert("Корзина очищена");
+        }
+
+        return this.basket;
+    },
     amount: function(){
         var basket = this.basket;
 
