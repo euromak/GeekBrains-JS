@@ -67,7 +67,7 @@ var cart = {
             sex: 'female',
             size: ['xxs', 'xs', 's', 'm', 'l', 'xl', 'xxl'],
             color: ['white', 'black', 'red', 'green', 'blue'],
-            description: "Compellingly actualize fully researched processes before proactive outsourcing. Progressively syndicate collaborative architectures before cutting-edge services. Completely visualize parallel core competencies rather than exceptional portals.",
+            description: 'Compellingly actualize fully researched processes before proactive outsourcing. Progressively syndicate collaborative architectures before cutting-edge services. Completely visualize parallel core competencies rather than exceptional portals.',
             sale: false,
         },
         {
@@ -80,7 +80,7 @@ var cart = {
             sex: 'male',
             size: ['xxs', 'xs', 's', 'm', 'l', 'xl', 'xxl'],
             color: ['white', 'black', 'red', 'green', 'blue'],
-            description: "Compellingly actualize fully researched processes before proactive outsourcing. Progressively syndicate collaborative architectures before cutting-edge services. Completely visualize parallel core competencies rather than exceptional portals.",
+            description: 'Compellingly actualize fully researched processes before proactive outsourcing. Progressively syndicate collaborative architectures before cutting-edge services. Completely visualize parallel core competencies rather than exceptional portals.',
             sale: false,
         },
         {
@@ -93,7 +93,7 @@ var cart = {
             sex: 'male',
             size: ['s', 'm', 'l', 'xl', 'xxl'],
             color: ['red', 'green', 'blue'],
-            description: "Compellingly actualize fully researched processes before proactive outsourcing. Progressively syndicate collaborative architectures before cutting-edge services. Completely visualize parallel core competencies rather than exceptional portals.",
+            description: 'Compellingly actualize fully researched processes before proactive outsourcing. Progressively syndicate collaborative architectures before cutting-edge services. Completely visualize parallel core competencies rather than exceptional portals.',
             sale: false,
         },
         {
@@ -106,7 +106,7 @@ var cart = {
             sex: 'male',
             size: ['s', 'm', 'l', 'xl', 'xxl'],
             color: ['white', 'blue'],
-            description: "Compellingly actualize fully researched processes before proactive outsourcing. Progressively syndicate collaborative architectures before cutting-edge services. Completely visualize parallel core competencies rather than exceptional portals.",
+            description: 'Compellingly actualize fully researched processes before proactive outsourcing. Progressively syndicate collaborative architectures before cutting-edge services. Completely visualize parallel core competencies rather than exceptional portals.',
             sale: false,
 
         },
@@ -120,7 +120,7 @@ var cart = {
             sex: 'female',
             size: ['xxs', 'xs', 's', 'm',],
             color: ['black', 'purple'],
-            description: "Compellingly actualize fully researched processes before proactive outsourcing. Progressively syndicate collaborative architectures before cutting-edge services. Completely visualize parallel core competencies rather than exceptional portals.",
+            description: 'Compellingly actualize fully researched processes before proactive outsourcing. Progressively syndicate collaborative architectures before cutting-edge services. Completely visualize parallel core competencies rather than exceptional portals.',
             sale: false,
         },
         {
@@ -133,7 +133,7 @@ var cart = {
             sex: 'unisex',
             size: ['xxs', 'xs', 's', 'm', 'l', 'xl', 'xxl'],
             color: ['black',],
-            description: "Compellingly actualize fully researched processes before proactive outsourcing. Progressively syndicate collaborative architectures before cutting-edge services. Completely visualize parallel core competencies rather than exceptional portals.",
+            description: 'Compellingly actualize fully researched processes before proactive outsourcing. Progressively syndicate collaborative architectures before cutting-edge services. Completely visualize parallel core competencies rather than exceptional portals.',
             sale: false,
 
         },
@@ -147,7 +147,7 @@ var cart = {
             sex: 'female',
             size: ['xxs', 'xs', 's', 'm',],
             color: ['white', 'black', 'blue'],
-            description: "Compellingly actualize fully researched processes before proactive outsourcing. Progressively syndicate collaborative architectures before cutting-edge services. Completely visualize parallel core competencies rather than exceptional portals.",
+            description: 'Compellingly actualize fully researched processes before proactive outsourcing. Progressively syndicate collaborative architectures before cutting-edge services. Completely visualize parallel core competencies rather than exceptional portals.',
             sale: false,
         },
         {
@@ -160,7 +160,7 @@ var cart = {
             sex: 'female',
             size: ['xxs', 'xs', 's', 'm',],
             color: ['white', 'black', 'red', 'green', 'blue'],
-            description: "Compellingly actualize fully researched processes before proactive outsourcing. Progressively syndicate collaborative architectures before cutting-edge services. Completely visualize parallel core competencies rather than exceptional portals.",
+            description: 'Compellingly actualize fully researched processes before proactive outsourcing. Progressively syndicate collaborative architectures before cutting-edge services. Completely visualize parallel core competencies rather than exceptional portals.',
             sale: true,
 
         },
@@ -174,7 +174,7 @@ var cart = {
             sex: 'unisex',
             size: ['xxs', 'xs', 's', 'm', 'l', 'xl', 'xxl'],
             color: ['white', 'black',],
-            description: "Compellingly actualize fully researched processes before proactive outsourcing. Progressively syndicate collaborative architectures before cutting-edge services. Completely visualize parallel core competencies rather than exceptional portals.",
+            description: 'Compellingly actualize fully researched processes before proactive outsourcing. Progressively syndicate collaborative architectures before cutting-edge services. Completely visualize parallel core competencies rather than exceptional portals.',
             sale: false,
         },
         {
@@ -187,7 +187,7 @@ var cart = {
             sex: 'male',
             size: ['l', 'xl', 'xxl'],
             color: ['blue'],
-            description: "Compellingly actualize fully researched processes before proactive outsourcing. Progressively syndicate collaborative architectures before cutting-edge services. Completely visualize parallel core competencies rather than exceptional portals.",
+            description: 'Compellingly actualize fully researched processes before proactive outsourcing. Progressively syndicate collaborative architectures before cutting-edge services. Completely visualize parallel core competencies rather than exceptional portals.',
             sale: false,
 
         },
@@ -207,7 +207,7 @@ var cart = {
                 basket.push(products[i]);
                 this.priceTotal += products[i].price;
                 this.quantity++;
-                alert("Добавлен товар: \n" + cart.products[i].name + " - " + cart.products[i].price + " руб." + '\n\n' + "Ваша корзина: \n" + "Кол-во - " + this.quantity + "\n" + "Общая стоимость - " + this.priceTotal + " руб");
+                alert('Добавлен товар: \n' + cart.products[i].name + ' - ' + cart.products[i].price + ' руб.' + '\n\n' + 'Ваша корзина: \n' + 'Кол-во - ' + this.quantity + '\n' + 'Общая стоимость - ' + this.priceTotal + ' руб');
                 break;
             }
             else if(answer == null){
@@ -215,13 +215,13 @@ var cart = {
             }
         }
 
-        var message = confirm("Продолжить покупки?");
+        var message = confirm('Продолжить покупки?');
 
         if(message == true){
             this.add();
         }
         else{
-            alert("Ваша корзина: \n" + "Кол-во - " + this.quantity + "\n" + "Общая стоимость - " + this.priceTotal + " руб")
+            alert('Ваша корзина: \n' + 'Кол-во - ' + this.quantity + '\n' + 'Общая стоимость - ' + this.priceTotal + ' руб')
         }
 
         return basket;
@@ -240,11 +240,11 @@ var cart = {
         return this.priceTotal;
     },
     showCatalog: function(){
-        var output = "";
+        var output = '';
 
         // (выводим номер / название продукта / стоимость) с новой строки
         for(var i = 0; i < cart.products.length; i++){
-            output += (i + 1) + ") " + cart.products[i].name + " - " + cart.products[i].price + " руб." + '\n';
+            output += (i + 1) + ') ' + cart.products[i].name + ' - ' + cart.products[i].price + ' руб.' + '\n';
         }
 
         return prompt(output);
