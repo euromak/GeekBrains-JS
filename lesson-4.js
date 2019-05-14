@@ -203,7 +203,7 @@ var cart = {
 
         for(i = 0; i < products.length; i++){
             // проверка ответа пользователя со значениями продуктов
-            if(answer == products[i].article){
+            if(answer == products[i].article || answer === products[i].name){
                 basket.push(products[i]);
                 this.priceTotal += products[i].price;
                 this.quantity++;
