@@ -11,15 +11,18 @@
         .table{
             display: flex;
             flex-wrap: wrap;
-            margin: 200px auto;
+            margin: 100px auto;
             width: 240px;
             height: 240px;
         }
-        .table div:nth-child(2n+5){
-            background-color: rgb(124,65,65);
+        .row{
+            display: flex;
         }
         .cell{
-            /*background-color: rgb(240,212,173);*/
+            background-color: rgb(240,212,173);
+            display: flex;
+            justify-content: center;
+            align-items: center;
             width: 30px;
             height: 30px;
             outline: 1px solid black;
