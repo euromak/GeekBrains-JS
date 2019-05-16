@@ -1,4 +1,5 @@
 // EXERSISE # 1
+/*
 function chessmate(){
     var $table = document.createElement('div');
     $table.classList.add('table');
@@ -54,8 +55,10 @@ function chessmate(){
 
 chessmate();
 
+*/
+
 // EXERSISE # 2
-/*
+
 var cart = {
     basket: [],
     products: [
@@ -271,11 +274,35 @@ var cart = {
             $cart.innerHTML = 'Ваша корзина пуста';
         }
 
+    },
+    showCalalogPage: function(){
+        var $catalog = document.getElementById('catalog');
+
+        var $product = document.createElement('div');
+        $product.className = 'products';
+
+
+        for(var i = 0; i < this.products.length; i++){
+            var $item = document.createElement('div');
+            $item.className = 'item';
+            $item.style.border = '1px solid black';
+            $item.innerHTML = this.products[i].name + '' + this.products[i].brand + '' + this.products[i].price;
+            $product.appendChild($item);
+        }
+
+        $catalog.appendChild($product);
     }
 };
 
 cart.add();
+
+// EXERSISE # 3
+/*
+cart.showCalalogPage();
 */
+
+
+
 
 
 
