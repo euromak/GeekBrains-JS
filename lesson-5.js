@@ -9,40 +9,251 @@ var $cell = document.createElement('div');
 $cell.classList.add('cell');
 
 for(var i = 0; i < 8; i++){
-    $table.appendChild($row.cloneNode($row));
+    var $row = document.createElement('div');
+    $row.classList.add('row');
+
     for(var j = 0; j < 8; j++){
-        var rowCell = document.getElementsByClassName('row')[i];
-        rowCell.appendChild($cell.cloneNode($cell));
+        var $cell = document.createElement('div');
+        $cell.classList.add('cell');
+        $row.appendChild($cell);
     }
-}
 
-for(i = 0; i < 8; i++){
-    var rowCell = document.getElementsByClassName('row')[i];
-    var cellColor = document.getElementsByClassName('cell');
-
-    if(i % 2 == 1){
-        cellColor[i].style.backgroundColor = '#7e4105';
-    }
-    console.log(i);
-
-}
-
-
-
-
-/*
-// добавляем клетки в ряд
-for(var i = 0; i < 8; i++){
-    $cell = $cell.cloneNode(true);
-    $row.appendChild($cell);
-}
-// добавляем ряды в логический контейнер
-for(i = 0; i < 8; i++){
-    $row = $row.cloneNode(true);
     $table.appendChild($row);
 }
-*/
-// раскрашиваем клетки доски
+
+for(i = 0; i < 8; i++){
+    var row = document.getElementsByClassName('row');
+
+
+    for(j = 0; j < 8; j++){
+        var cell = document.getElementsByClassName('cell');
+        cell[j].style.backgroundColor = 'brown';
+    }
+
+}
+
+
+// EXERSISE # 2
+
+var cart = {
+    basket: [],
+    products: [
+        {
+            name: 'Футболка Mango LifeStyle',
+            article: 1,
+            price: 3000,
+            quantity: 0,
+            category: 't-shirt',
+            brand: 'mango',
+            sex: 'female',
+            size: ['xxs', 'xs', 's', 'm', 'l', 'xl', 'xxl'],
+            color: ['white', 'black', 'red', 'green', 'blue'],
+            description: 'Compellingly actualize fully researched processes before proactive outsourcing. Progressively syndicate collaborative architectures before cutting-edge services. Completely visualize parallel core competencies rather than exceptional portals.',
+            sale: false,
+        },
+        {
+            name: 'Брюки Lacoste',
+            article: 2,
+            price: 8000,
+            quantity: 0,
+            category: 'pants',
+            brand: 'lacoste',
+            sex: 'male',
+            size: ['xxs', 'xs', 's', 'm', 'l', 'xl', 'xxl'],
+            color: ['white', 'black', 'red', 'green', 'blue'],
+            description: 'Compellingly actualize fully researched processes before proactive outsourcing. Progressively syndicate collaborative architectures before cutting-edge services. Completely visualize parallel core competencies rather than exceptional portals.',
+            sale: false,
+        },
+        {
+            name: 'Шорты Ostin',
+            article: 3,
+            price: 1500,
+            quantity: 0,
+            category: 'shorts',
+            brand: 'ostin',
+            sex: 'male',
+            size: ['s', 'm', 'l', 'xl', 'xxl'],
+            color: ['red', 'green', 'blue'],
+            description: 'Compellingly actualize fully researched processes before proactive outsourcing. Progressively syndicate collaborative architectures before cutting-edge services. Completely visualize parallel core competencies rather than exceptional portals.',
+            sale: false,
+        },
+        {
+            name: 'Рубашка Lacoste',
+            article: 4,
+            price: 5500,
+            quantity: 0,
+            category: 'shirt',
+            brand: 'lacoste',
+            sex: 'male',
+            size: ['s', 'm', 'l', 'xl', 'xxl'],
+            color: ['white', 'blue'],
+            description: 'Compellingly actualize fully researched processes before proactive outsourcing. Progressively syndicate collaborative architectures before cutting-edge services. Completely visualize parallel core competencies rather than exceptional portals.',
+            sale: false,
+
+        },
+        {
+            name: 'Тостовка City',
+            article: 5,
+            price: 9999,
+            quantity: 0,
+            category: 'sweatshirt',
+            brand: 'Armani',
+            sex: 'female',
+            size: ['xxs', 'xs', 's', 'm',],
+            color: ['black', 'purple'],
+            description: 'Compellingly actualize fully researched processes before proactive outsourcing. Progressively syndicate collaborative architectures before cutting-edge services. Completely visualize parallel core competencies rather than exceptional portals.',
+            sale: false,
+        },
+        {
+            name: 'Брюки Zara',
+            article: 6,
+            price: 4000,
+            quantity: 0,
+            category: 'pants',
+            brand: 'zara',
+            sex: 'unisex',
+            size: ['xxs', 'xs', 's', 'm', 'l', 'xl', 'xxl'],
+            color: ['black',],
+            description: 'Compellingly actualize fully researched processes before proactive outsourcing. Progressively syndicate collaborative architectures before cutting-edge services. Completely visualize parallel core competencies rather than exceptional portals.',
+            sale: false,
+
+        },
+        {
+            name: 'Брюки Street style',
+            article: 7,
+            price: 5000,
+            quantity: 0,
+            category: 'pants',
+            brand: 'mango',
+            sex: 'female',
+            size: ['xxs', 'xs', 's', 'm',],
+            color: ['white', 'black', 'blue'],
+            description: 'Compellingly actualize fully researched processes before proactive outsourcing. Progressively syndicate collaborative architectures before cutting-edge services. Completely visualize parallel core competencies rather than exceptional portals.',
+            sale: false,
+        },
+        {
+            name: 'Футболка Black Diamond',
+            article: 8,
+            price: 1100,
+            quantity: 0,
+            category: 't-shirt',
+            brand: 'lacoste',
+            sex: 'female',
+            size: ['xxs', 'xs', 's', 'm',],
+            color: ['white', 'black', 'red', 'green', 'blue'],
+            description: 'Compellingly actualize fully researched processes before proactive outsourcing. Progressively syndicate collaborative architectures before cutting-edge services. Completely visualize parallel core competencies rather than exceptional portals.',
+            sale: true,
+
+        },
+        {
+            name: 'Футболка Zara',
+            article: 9,
+            price: 3500,
+            quantity: 0,
+            category: 't-shirt',
+            brand: 'zara',
+            sex: 'unisex',
+            size: ['xxs', 'xs', 's', 'm', 'l', 'xl', 'xxl'],
+            color: ['white', 'black',],
+            description: 'Compellingly actualize fully researched processes before proactive outsourcing. Progressively syndicate collaborative architectures before cutting-edge services. Completely visualize parallel core competencies rather than exceptional portals.',
+            sale: false,
+        },
+        {
+            name: 'Ремень',
+            article: 10,
+            price: 4000,
+            quantity: 0,
+            category: 'accessories',
+            brand: 'lacoste',
+            sex: 'male',
+            size: ['l', 'xl', 'xxl'],
+            color: ['blue'],
+            description: 'Compellingly actualize fully researched processes before proactive outsourcing. Progressively syndicate collaborative architectures before cutting-edge services. Completely visualize parallel core competencies rather than exceptional portals.',
+            sale: false,
+
+        },
+    ],
+    priceTotal: 0,
+    quantity: 0,
+    add: function(){
+        var basket = this.basket;
+        var products = this.products;
+        var i;
+        var answer = cart.showCatalog();
+
+        for(i = 0; i < products.length; i++){
+
+            if(answer == products[i].article || answer === products[i].name){
+                basket.push(products[i]);
+                this.priceTotal += products[i].price;
+                this.quantity++;
+                alert('Добавлен товар: \n' + cart.products[i].name + ' - ' + cart.products[i].price + ' руб.' + '\n\n' + 'Ваша корзина: \n' + 'Кол-во - ' + this.quantity + '\n' + 'Общая стоимость - ' + this.priceTotal + ' руб');
+                break;
+            }
+            else if(answer == null){
+                break;
+            }
+        }
+
+        var message = confirm('Продолжить покупки?');
+
+        if(message == true){
+            this.add();
+        }
+        else{
+            alert('Ваша корзина: \n' + 'Кол-во - ' + this.quantity + '\n' + 'Общая стоимость - ' + this.priceTotal + ' руб');
+            this.showCart();
+        }
+
+        return basket;
+    },
+    delete: function(){
+        var deleteBaslek = confirm("Очистить корзину?");
+
+        if(deleteBaslek == true){
+            this.basket.length = 0;
+            alert("Корзина очищена");
+        }
+
+        return this.basket;
+    },
+    amount: function(){
+        var basket = this.basket;
+
+        if(this.priceTotal == 0){
+            for(var i = 0; i < basket.length; i++){
+                this.priceTotal += basket[i].price;
+                console.log(i);
+            }
+        }
+
+        return this.priceTotal;
+    },
+    showCatalog: function(){
+        var output = '';
+
+        // (выводим номер / название продукта / стоимость) с новой строки
+        for(var i = 0; i < cart.products.length; i++){
+            output += (i + 1) + ') ' + cart.products[i].name + ' - ' + cart.products[i].price + ' руб.' + '\n';
+        }
+
+        return prompt(output);
+    },
+    showCart: function(){
+        var $cart = document.getElementById('cart');
+        $cart.style.position = 'absolute';
+
+        if(this.quantity > 0){
+            $cart.innerHTML = 'В корзине: ' + this.quantity + ' товар(ов)' + ' на сумму: ' + this.priceTotal + ' руб.';
+        }
+        else{
+            $cart.innerHTML = 'Ваша корзина пуста';
+        }
+
+    }
+};
+
+cart.add();
 
 
 
