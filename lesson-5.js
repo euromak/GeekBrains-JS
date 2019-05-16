@@ -1,40 +1,61 @@
-var $table = document.createElement('div');
-$table.classList.add('table');
-document.body.appendChild($table);
+// EXERSISE # 1
+function chessmate(){
+    var $table = document.createElement('div');
+    $table.classList.add('table');
+    document.body.appendChild($table);
 
-var $row = document.createElement('div');
-$row.classList.add('row');
-
-var $cell = document.createElement('div');
-$cell.classList.add('cell');
-
-for(var i = 0; i < 8; i++){
     var $row = document.createElement('div');
     $row.classList.add('row');
 
-    for(var j = 0; j < 8; j++){
-        var $cell = document.createElement('div');
-        $cell.classList.add('cell');
-        $row.appendChild($cell);
+    var $cell = document.createElement('div');
+    $cell.classList.add('cell');
+
+    for(var i = 0; i < 8; i++){
+        var $row = document.createElement('div');
+        $row.classList.add('row');
+
+        var $numberRow = document.createElement('div');
+        $numberRow.classList = 'number';
+        $numberRow.innerHTML = 8-i;
+        $row.insertBefore($numberRow, $row[1]);
+
+
+        for(var j = 0; j < 8; j++){
+            var $cell = document.createElement('div');
+            $cell.classList.add('cell');
+
+            if(i % 2 == 0 && j % 2 == 1){
+                $cell.classList.add('black');
+            }
+            else if(i % 2 == 1 && j % 2 == 0){
+                $cell.classList.add('black');
+            }
+
+            $row.appendChild($cell);
+        }
+
+        $row.appendChild($numberRow.cloneNode($numberRow));
+        $table.appendChild($row);
     }
 
-    $table.appendChild($row);
-}
-
-for(i = 0; i < 8; i++){
-    var row = document.getElementsByClassName('row');
-
-
-    for(j = 0; j < 8; j++){
-        var cell = document.getElementsByClassName('cell');
-        cell[j].style.backgroundColor = 'brown';
+    for(i = 0; i < 8; i++){
+        var letterRow = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+        var letterRowReverse = ['H', 'G', 'F', 'E', 'D', 'C', 'B', 'A'];
+        var $letterRowBottom = document.createElement('div');
+        var $letterRowTop = document.createElement('div');
+        $letterRowTop.classList.add('letter');
+        $letterRowBottom.classList.add('letter');
+        $letterRowBottom.innerHTML = letterRow[i];
+        $letterRowTop.innerHTML = letterRowReverse[i];
+        $table.insertBefore($letterRowTop.cloneNode($letterRowTop), $table.children[0]);
+        $table.appendChild($letterRowBottom.cloneNode($letterRowBottom));
     }
-
 }
 
+chessmate();
 
 // EXERSISE # 2
-
+/*
 var cart = {
     basket: [],
     products: [
@@ -254,7 +275,7 @@ var cart = {
 };
 
 cart.add();
-
+*/
 
 
 
