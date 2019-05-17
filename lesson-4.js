@@ -220,7 +220,8 @@ var cart = {
             this.add();
         }
         else{
-            alert('Ваша корзина: \n' + 'Кол-во - ' + this.quantity + '\n' + 'Общая стоимость - ' + this.priceTotal + ' руб')
+            alert('Ваша корзина: \n' + 'Кол-во - ' + this.quantity + '\n' + 'Общая стоимость - ' + this.priceTotal + ' руб');
+            this.showCart();
         }
 
         return basket;
@@ -257,9 +258,23 @@ var cart = {
 
         return prompt(output);
     },
+    showCart: function(){
+        var $cart = document.getElementById('cart');
+        $cart.style.float = 'left';
+
+        if(this.quantity > 0){
+            $cart.innerHTML = 'В корзине: ' + this.quantity + ' товар(ов)' + ' на сумму: ' + this.priceTotal + ' руб.';
+        }
+        else{
+            $cart.innerHTML = 'Ваша корзина пуста';
+        }
+
+    }
 };
 
 cart.add();
+
+
 
 
 
