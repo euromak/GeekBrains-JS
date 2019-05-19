@@ -1,5 +1,5 @@
 // EXERSISE # 1
-/*
+
 function chessmate(){
     var $table = document.createElement('div');
     $table.classList.add('table');
@@ -55,7 +55,7 @@ function chessmate(){
 
 chessmate();
 
-*/
+
 
 // EXERSISE # 2
 
@@ -297,9 +297,9 @@ var cart = {
 cart.add();
 
 // EXERSISE # 3
-/*
+
 cart.showCalalogPage();
-*/
+
 
 
 

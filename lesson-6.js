@@ -57,7 +57,7 @@ var catalog = {
 
     ],
     build: function(){
-        var $catalog = document.getElementById('catalog');
+        var $catalog = document.querySelector('#catalog');
 
         for(var i = 0; i < catalog.catalogData.length; i++){
             var $product = document.createElement('div');
@@ -76,15 +76,64 @@ var catalog = {
             $product.appendChild($price);
 
             var $buy = document.createElement('button');
+            $buy.classList.add('btn');
             $buy.innerHTML = 'КУПИТЬ';
+            $buy.dataset.name = catalog.catalogData[i].name;
             $product.appendChild($buy);
 
             $catalog.appendChild($product);
 
         }
-    }
+
+    },
 }
 
-var cart = {};
+var cart = {
+    basket: [],
+    priceTotal: 0,
+    quantity: 0,
+    build: function(){
+        var $catalog = document.querySelector('#catalog');
+        var $cart = document.createElement('div');
+        $cart.setAttribute('id', 'cart');
+        $cart.innerHTML = 'Корзина: ' + cart.quantity;
+        document.body.insertBefore($cart, $catalog);
+    },
+    add: function(){
+        var $getButton = document.querySelector('#catalog');
+        $getButton.addEventListener('click', addBasket);
+
+        function addBasket(event){
+            if(event.target.className === 'btn'){
+
+                for(var i = 0; i < catalog.catalogData.length; i++){
+
+                    if(event.target.dataset.name === catalog.catalogData[i].name){
+                        cart.basket.push(catalog.catalogData[i]);
+                        cart.quantity++;
+                        cart.priceTotal += catalog.catalogData[i].price;
+
+                        var $cart = document.getElementById('cart');
+                        $cart.innerHTML = 'Корзина: ' + cart.quantity + '\n' + cart.basket[0].name;
+
+                        break;
+                    }
+
+                }
+
+            }
+
+        }
+    },
+}
 
 window.addEventListener('load', catalog.build);
+window.addEventListener('load', cart.build);
+window.addEventListener('load', cart.add);
+
+
+
+
+
+
+
