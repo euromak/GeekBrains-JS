@@ -96,8 +96,27 @@ var cart = {
         var $catalog = document.querySelector('#catalog');
         var $cart = document.createElement('div');
         $cart.setAttribute('id', 'cart');
-        $cart.innerHTML = 'Корзина: ' + cart.quantity;
+        $cart.innerHTML = '<b>КОРЗИНА:</b>';
+
+        var $totalQuantity = document.createElement('div');
+        $totalQuantity.innerHTML = '<b>КОЛ-ВО: </b>' + cart.quantity + ' шт.';
+        $totalQuantity.id = 'totalQuantity';
+        $cart.appendChild($totalQuantity);
+
+        var $totalPriceCart = document.createElement('div');
+        $totalPriceCart.innerHTML = '<b>ИТОГО: </b>' + cart.priceTotal + ' руб.';
+        $totalPriceCart.id = 'Totalprice';
+        $cart.appendChild($totalPriceCart);
+
         document.body.insertBefore($cart, $catalog);
+    },
+    buildCartItem: function(){
+        var $cart = document.querySelector('#cart');
+        var $item = document.createElement('div');
+        $item.classList = 'item';
+        var $totalQuantity = document.getElementById('totalQuantity');
+        $item.innerHTML = cart.basket[cart.basket.length-1].name + ' ' + cart.basket[cart.basket.length-1].price + ' руб.';
+        $cart.insertBefore($item, $totalQuantity);
     },
     add: function(){
         var $getButton = document.querySelector('#catalog');
@@ -113,8 +132,13 @@ var cart = {
                         cart.quantity++;
                         cart.priceTotal += catalog.catalogData[i].price;
 
-                        var $cart = document.getElementById('cart');
-                        $cart.innerHTML = 'Корзина: ' + cart.quantity + '\n' + cart.basket[0].name;
+                        var $totalQuantity = document.getElementById('totalQuantity');
+                        $totalQuantity.innerHTML = '<b>КОЛ-ВО: </b>' + cart.quantity + ' шт.';
+
+                        var $totalPriceCart = document.getElementById('Totalprice');
+                        $totalPriceCart.innerHTML = '<b>ИТОГО: </b>' + cart.priceTotal + ' руб.';
+
+                        cart.buildCartItem();
 
                         break;
                     }
@@ -122,9 +146,29 @@ var cart = {
                 }
 
             }
-
         }
     },
+    delete: function(){
+
+        for(var i = cart.basket.length; i > 0; i--){
+            var $cart = document.getElementById('cart');
+            var $items = document.getElementsByClassName('item')[i-1];
+
+            $cart.removeChild($items);
+        }
+
+        cart.priceTotal = 0,
+        cart.quantity = 0;
+        cart.basket.length = 0;
+
+        var $totalQuantity = document.getElementById('totalQuantity');
+        $totalQuantity.innerHTML = '<b>КОЛ-ВО: </b>' + cart.quantity + ' шт.';
+
+        var $totalPriceCart = document.getElementById('Totalprice');
+        $totalPriceCart.innerHTML = '<b>ИТОГО: </b>' + cart.priceTotal + ' руб.';
+
+        return alert('Корзина очищена');
+    }
 }
 
 window.addEventListener('load', catalog.build);
