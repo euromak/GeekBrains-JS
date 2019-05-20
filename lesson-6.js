@@ -247,8 +247,8 @@ var cart = {
                 $cart.removeChild($items);
             }
 
-            cart.priceTotal = 0,
-                cart.quantity = 0;
+            cart.priceTotal = 0;
+            cart.quantity = 0;
             cart.basket.length = 0;
 
             var $totalQuantity = document.getElementById('totalQuantity');
