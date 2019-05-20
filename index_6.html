@@ -5,6 +5,8 @@
     <title>Lesson # 6</title>
     <style>
         body{
+            font-family: verdana;
+            font-size: 14px;
             margin: 0;
         }
         #catalog {
@@ -37,6 +39,7 @@
             align-items: center;
         }
         .product{
+            position: relative;
             margin: 10px 0;
         }
         .bigImage{
@@ -47,18 +50,41 @@
             cursor: pointer;
         }
         button{
+            position: absolute;
+            top: 290px;
+            right: 0;
+            padding: 5px 10px;
+            font-weight: bold;
+            background-color: white;
+            border: 1px solid palevioletred;
+            color: palevioletred;
             cursor: pointer;
+        }
+        button:hover{
+            color: white;
+            background-color: palevioletred;
+
         }
         .prev, .next{
             color: white;
             font-weight: 700;
             cursor: pointer;
         }
+        .removeCart{
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            cursor: pointer;
+        }
+        .removeCart:hover{
+            color: darkred;
+        }
     </style>
 </head>
 <body>
     <div id="catalog"></div>
     <div id="modal"></div>
+    <script src="https://use.fontawesome.com/7634060d91.js"></script>
     <script src="lesson-6.js"></script>
 </body>
 </html>

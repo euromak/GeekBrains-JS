@@ -1,4 +1,4 @@
-var catalog = {
+var catalog =   {
     catalogData: [
         {
             name: 'Свитшот',
@@ -124,7 +124,7 @@ var catalog = {
                         $prev.dataset.article = catalog.catalogData[i].article;
                         $modal.appendChild($prev);
 
-                        $next.textContent = '--->';
+                        $next.innerHTML = '--->';
                         $next.dataset.article = catalog.catalogData[i].article;
                         $modal.appendChild($next);
                         $modal.style.display = 'flex';
@@ -180,7 +180,13 @@ var cart = {
         var $catalog = document.querySelector('#catalog');
         var $cart = document.createElement('div');
         $cart.setAttribute('id', 'cart');
-        $cart.innerHTML = '<b>КОРЗИНА:</b>';
+        $cart.innerHTML = '<i class="fa fa-shopping-basket" aria-hidden="true"></i><b> КОРЗИНА:</b>';
+
+        var $removeCart = document.createElement('div');
+        $removeCart.classList.add('removeCart');
+        $removeCart.innerHTML = '<i class="fa fa-trash-o" aria-hidden="true"></i>';
+        $cart.addEventListener('click', cart.delete);
+        $cart.appendChild($removeCart);
 
         var $totalQuantity = document.createElement('div');
         $totalQuantity.innerHTML = '<b>КОЛ-ВО: </b>' + cart.quantity + ' шт.';
@@ -232,26 +238,27 @@ var cart = {
             }
         }
     },
-    delete: function(){
+    delete: function(event){
+        if(event.target.tagName == 'I'){
+            for(var i = cart.basket.length; i > 0; i--){
+                var $cart = document.getElementById('cart');
+                var $items = document.getElementsByClassName('item')[i-1];
 
-        for(var i = cart.basket.length; i > 0; i--){
-            var $cart = document.getElementById('cart');
-            var $items = document.getElementsByClassName('item')[i-1];
+                $cart.removeChild($items);
+            }
 
-            $cart.removeChild($items);
+            cart.priceTotal = 0,
+                cart.quantity = 0;
+            cart.basket.length = 0;
+
+            var $totalQuantity = document.getElementById('totalQuantity');
+            $totalQuantity.innerHTML = '<b>КОЛ-ВО: </b>' + cart.quantity + ' шт.';
+
+            var $totalPriceCart = document.getElementById('Totalprice');
+            $totalPriceCart.innerHTML = '<b>ИТОГО: </b>' + cart.priceTotal + ' руб.';
+
+            return alert('Корзина очищена');
         }
-
-        cart.priceTotal = 0,
-        cart.quantity = 0;
-        cart.basket.length = 0;
-
-        var $totalQuantity = document.getElementById('totalQuantity');
-        $totalQuantity.innerHTML = '<b>КОЛ-ВО: </b>' + cart.quantity + ' шт.';
-
-        var $totalPriceCart = document.getElementById('Totalprice');
-        $totalPriceCart.innerHTML = '<b>ИТОГО: </b>' + cart.priceTotal + ' руб.';
-
-        return alert('Корзина очищена');
     }
 }
 
