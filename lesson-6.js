@@ -5,54 +5,63 @@ var catalog = {
             article: 1,
             price: 5000,
             image: 'https://www.topmangal.com/wp-content/uploads/man/product_1.jpg',
+            imageBig: 'https://www.topmangal.com/wp-content/uploads/man/product_big_1.jpg',
         },
         {
             name: 'Пальто',
             article: 2,
             price: 9000,
             image: 'https://www.topmangal.com/wp-content/uploads/man/product_2.jpg',
+            imageBig: 'https://www.topmangal.com/wp-content/uploads/man/product_big_2.jpg',
         },
         {
             name: 'Куртка',
             article: 3,
             price: 7500,
             image: 'https://www.topmangal.com/wp-content/uploads/man/product_3.jpg',
+            imageBig: 'https://www.topmangal.com/wp-content/uploads/man/product_big_3.jpg',
         },
         {
             name: 'Поло',
             article: 4,
             price: 4000,
             image: 'https://www.topmangal.com/wp-content/uploads/man/product_4.jpg',
+            imageBig: 'https://www.topmangal.com/wp-content/uploads/man/product_big_4.jpg',
         },
         {
             name: 'Свитшот',
             article: 5,
             price: 5000,
             image: 'https://www.topmangal.com/wp-content/uploads/man/product_5.jpg',
+            imageBig: 'https://www.topmangal.com/wp-content/uploads/man/product_big_5.jpg',
         },
         {
             name: 'Куртка',
             article: 6,
             price: 5500,
             image: 'https://www.topmangal.com/wp-content/uploads/man/product_6.jpg',
+            imageBig: 'https://www.topmangal.com/wp-content/uploads/man/product_big_6.jpg',
         },
         {
             name: 'Костюм',
             article: 7,
             price: 9000,
             image: 'https://www.topmangal.com/wp-content/uploads/man/product_7.jpg',
+            imageBig: 'https://www.topmangal.com/wp-content/uploads/man/product_big_7.jpg',
         },
         {
             name: 'Куртка',
             article: 8,
             price: 10000,
             image: 'https://www.topmangal.com/wp-content/uploads/man/product_8.jpg',
+            imageBig: 'https://www.topmangal.com/wp-content/uploads/man/product_big_8.jpg',
         },
         {
             name: 'Поло',
             article: 9,
             price: 2500,
             image: 'https://www.topmangal.com/wp-content/uploads/man/product_9.jpg',
+            imageBig: 'https://www.topmangal.com/wp-content/uploads/man/product_big_9.jpg',
         },
 
     ],
@@ -65,6 +74,7 @@ var catalog = {
 
             var $img = document.createElement('img');
             $img.setAttribute('src', catalog.catalogData[i].image);
+            $img.dataset.article = +catalog.catalogData[i].article;
             $product.appendChild($img);
 
             var $name = document.createElement('div');
@@ -78,13 +88,87 @@ var catalog = {
             var $buy = document.createElement('button');
             $buy.classList.add('btn');
             $buy.innerHTML = 'КУПИТЬ';
-            $buy.dataset.name = catalog.catalogData[i].name;
+            $buy.dataset.article = +catalog.catalogData[i].article;
             $product.appendChild($buy);
 
             $catalog.appendChild($product);
 
         }
 
+    },
+    showModal: function(){
+        var $catalog = document.querySelector('#catalog');
+        $catalog.addEventListener('click', openModal);
+        var $modal = document.querySelector('#modal');
+        $modal.addEventListener('click', closeModal);
+        var $imageBig = document.createElement('img');
+        $imageBig.classList.add('bigImage');
+
+        var $prev = document.createElement('div');
+        $prev.classList.add('prev');
+        $modal.addEventListener('click', nextImg);
+
+        var $next = document.createElement('div');
+        $next.classList.add('next');
+        $modal.addEventListener('click', prevImg);
+
+
+        function openModal(event){
+            if(event.target.tagName === 'IMG'){
+                for(var i = 0; i < catalog.catalogData.length; i++){
+                    if(event.target.dataset.article == catalog.catalogData[i].article){
+                        $imageBig.src = catalog.catalogData[i].imageBig;
+                        $modal.appendChild($imageBig);
+
+                        $prev.textContent = '<---';
+                        $prev.dataset.article = catalog.catalogData[i].article;
+                        $modal.appendChild($prev);
+
+                        $next.textContent = '--->';
+                        $next.dataset.article = catalog.catalogData[i].article;
+                        $modal.appendChild($next);
+                        $modal.style.display = 'flex';
+                    }
+                }
+            }
+        }
+
+        function closeModal(event){
+            $modal.removeChild($imageBig);
+            $modal.removeAttribute('style');
+        }
+
+        function nextImg(event){
+            if(event.target.className == 'next'){
+                for(var i = 0; i < catalog.catalogData.length; i++){
+                    if(event.target.dataset.article == catalog.catalogData[i].article){
+                        $imageBig.src = '';
+                        $imageBig.src = catalog.catalogData[i+1].imageBig;
+                        $next.dataset.article++;
+                        $modal.insertBefore($imageBig, $prev);
+                        $modal.style.display = 'flex';
+                        break;
+                    }
+
+                }
+
+            }
+        }
+
+        function prevImg(event){
+            if(event.target.className == 'prev'){
+                for(var i = event.target.dataset.article; i <= catalog.catalogData.length; i--){
+                    if(event.target.dataset.article == catalog.catalogData[i].article){
+                        $imageBig.src = '';
+                        $imageBig.src = catalog.catalogData[i-1].imageBig;
+                        $prev.dataset.article--;
+                        $modal.insertBefore($imageBig, $prev);
+                        $modal.style.display = 'flex';
+                        break;
+                    }
+                }
+            }
+        }
     },
 }
 
@@ -127,7 +211,7 @@ var cart = {
 
                 for(var i = 0; i < catalog.catalogData.length; i++){
 
-                    if(event.target.dataset.name === catalog.catalogData[i].name){
+                    if(event.target.dataset.article == catalog.catalogData[i].article){
                         cart.basket.push(catalog.catalogData[i]);
                         cart.quantity++;
                         cart.priceTotal += catalog.catalogData[i].price;
@@ -172,6 +256,7 @@ var cart = {
 }
 
 window.addEventListener('load', catalog.build);
+window.addEventListener('load', catalog.showModal);
 window.addEventListener('load', cart.build);
 window.addEventListener('load', cart.add);
 
