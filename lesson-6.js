@@ -1,4 +1,36 @@
+/*
+
+1)
+- Сделать генерацию корзины динамической: верстка корзины не должна находиться в HTML-структуре. Там должен быть только div, в который будет вставляться корзина, сгенерированная на базе JS:
+- Пустая корзина должна выводить строку «Корзина пуста»;
+- Наполненная должна выводить «В корзине: n товаров на сумму m рублей».
+2)
+- Сделать так, чтобы товары в каталоге выводились при помощи JS:
+- Создать массив товаров (сущность Product);
+- При загрузке страницы на базе данного массива генерировать вывод из него. HTML-код должен содержать только div id=”catalog” без вложенного кода. Весь вид каталога генерируется JS.
+3)
+- Добавлять в объект корзины выбранные товары по клику на кнопке «Купить» без перезагрузки страницы;
+- Привязать к событию покупки товара пересчет корзины и обновление ее внешнего вида.
+4)
+- У товара может быть несколько изображений. Нужно:
+- Реализовать функционал показа полноразмерных картинок товара в модальном окне;
+- Реализовать функционал перехода между картинками внутри модального окна.
+5)
+- Реализовать страницу корзины:
+- Добавить возможность не только смотреть состав корзины, но и редактировать его, обновляя общую стоимость или выводя сообщение «Корзина пуста».
+6)
+- На странице корзины:
+- Сделать отдельные блоки «Состав корзины», «Адрес доставки», «Комментарий»;
+- Сделать эти поля сворачиваемыми;
+- Заполнять поля по очереди, то есть давать посмотреть состав корзины, внизу которого есть кнопка «Далее». Если нажать ее, сворачивается «Состав корзины» и открывается «Адрес доставки» и так далее.
+
+*/
+
+'use strict';
+
+// каталог
 var catalog =   {
+    // база товаров
     catalogData: [
         {
             name: 'Свитшот',
@@ -65,6 +97,7 @@ var catalog =   {
         },
 
     ],
+    // метод, выводящий каталог
     build: function(){
         var $catalog = document.querySelector('#catalog');
 
@@ -96,6 +129,7 @@ var catalog =   {
         }
 
     },
+    // метод, выводящий модальное окно
     showModal: function(){
         var $catalog = document.querySelector('#catalog');
         $catalog.addEventListener('click', openModal);
@@ -111,7 +145,6 @@ var catalog =   {
         var $next = document.createElement('div');
         $next.classList.add('next');
         $modal.addEventListener('click', prevImg);
-
 
         function openModal(event){
             if(event.target.tagName === 'IMG'){
@@ -178,6 +211,7 @@ var cart = {
     quantity: 0,
     build: function(){
         var $catalog = document.querySelector('#catalog');
+
         var $cart = document.createElement('div');
         $cart.setAttribute('id', 'cart');
         $cart.innerHTML = '<i class="fa fa-shopping-basket" aria-hidden="true"></i><b> КОРЗИНА:</b>';
@@ -202,10 +236,12 @@ var cart = {
     },
     buildCartItem: function(){
         var $cart = document.querySelector('#cart');
+
         var $item = document.createElement('div');
         $item.classList = 'item';
+
         var $totalQuantity = document.getElementById('totalQuantity');
-        $item.innerHTML = cart.basket[cart.basket.length-1].name + ' ' + cart.basket[cart.basket.length-1].price + ' руб.';
+        $item.innerHTML = cart.basket[cart.basket.length-1].name + ' ' + cart.basket[cart.basket.length-1].price + ' руб. ' + ' <i class="fa fa-times-circle closeItem" aria-hidden="true"></i>';
         $cart.insertBefore($item, $totalQuantity);
     },
     add: function(){
