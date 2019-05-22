@@ -216,6 +216,7 @@ var cart = {
         $cart.setAttribute('id', 'cart');
         $cart.innerHTML = '<i class="fa fa-shopping-basket" aria-hidden="true"></i><b> КОРЗИНА:</b>';
 
+
         var $removeCart = document.createElement('div');
         $removeCart.classList.add('removeCart');
         $removeCart.innerHTML = '<i class="fa fa-trash-o" aria-hidden="true"></i>';
@@ -241,8 +242,9 @@ var cart = {
         $item.classList = 'item';
 
         var $totalQuantity = document.getElementById('totalQuantity');
-        $item.innerHTML = cart.basket[cart.basket.length-1].name + ' ' + cart.basket[cart.basket.length-1].price + ' руб. ' + ' <i class="fa fa-times-circle closeItem" aria-hidden="true"></i>';
+        $item.innerHTML = cart.basket[cart.basket.length-1].name + ' ' + cart.basket[cart.basket.length-1].price + ' руб. ' + ' <i class="closeItem fa fa-times-circle " aria-hidden="true"></i>';
         $cart.insertBefore($item, $totalQuantity);
+
     },
     add: function(){
         var $getButton = document.querySelector('#catalog');
@@ -266,6 +268,16 @@ var cart = {
 
                         cart.buildCartItem();
 
+                        for( var j = 0; j < catalog.catalogData.length; j++){
+                            if(event.target.dataset.article == catalog.catalogData[j].article){
+                                var $closeItem = document.getElementsByClassName('closeItem')[i];
+                                $closeItem.dataset.article = event.target.dataset.article;
+                                console.log(event.target.dataset.article);
+                            }
+
+                        }
+
+
                         break;
                     }
 
@@ -275,7 +287,7 @@ var cart = {
         }
     },
     delete: function(event){
-        if(event.target.tagName == 'I'){
+        if(event.target.className === 'fa fa-trash-o'){
             for(var i = cart.basket.length; i > 0; i--){
                 var $cart = document.getElementById('cart');
                 var $items = document.getElementsByClassName('item')[i-1];
