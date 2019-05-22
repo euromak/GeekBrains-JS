@@ -34,63 +34,63 @@ var catalog =   {
     catalogData: [
         {
             name: 'Свитшот',
-            article: 1,
+            article: 0,
             price: 5000,
             image: 'https://www.topmangal.com/wp-content/uploads/man/product_1.jpg',
             imageBig: 'https://www.topmangal.com/wp-content/uploads/man/product_big_1.jpg',
         },
         {
             name: 'Пальто',
-            article: 2,
+            article: 1,
             price: 9000,
             image: 'https://www.topmangal.com/wp-content/uploads/man/product_2.jpg',
             imageBig: 'https://www.topmangal.com/wp-content/uploads/man/product_big_2.jpg',
         },
         {
             name: 'Куртка',
-            article: 3,
+            article: 2,
             price: 7500,
             image: 'https://www.topmangal.com/wp-content/uploads/man/product_3.jpg',
             imageBig: 'https://www.topmangal.com/wp-content/uploads/man/product_big_3.jpg',
         },
         {
             name: 'Поло',
-            article: 4,
+            article: 3,
             price: 4000,
             image: 'https://www.topmangal.com/wp-content/uploads/man/product_4.jpg',
             imageBig: 'https://www.topmangal.com/wp-content/uploads/man/product_big_4.jpg',
         },
         {
             name: 'Свитшот',
-            article: 5,
+            article: 4,
             price: 5000,
             image: 'https://www.topmangal.com/wp-content/uploads/man/product_5.jpg',
             imageBig: 'https://www.topmangal.com/wp-content/uploads/man/product_big_5.jpg',
         },
         {
             name: 'Куртка',
-            article: 6,
+            article: 5,
             price: 5500,
             image: 'https://www.topmangal.com/wp-content/uploads/man/product_6.jpg',
             imageBig: 'https://www.topmangal.com/wp-content/uploads/man/product_big_6.jpg',
         },
         {
             name: 'Костюм',
-            article: 7,
+            article: 6,
             price: 9000,
             image: 'https://www.topmangal.com/wp-content/uploads/man/product_7.jpg',
             imageBig: 'https://www.topmangal.com/wp-content/uploads/man/product_big_7.jpg',
         },
         {
             name: 'Куртка',
-            article: 8,
+            article: 7,
             price: 10000,
             image: 'https://www.topmangal.com/wp-content/uploads/man/product_8.jpg',
             imageBig: 'https://www.topmangal.com/wp-content/uploads/man/product_big_8.jpg',
         },
         {
             name: 'Поло',
-            article: 9,
+            article: 8,
             price: 2500,
             image: 'https://www.topmangal.com/wp-content/uploads/man/product_9.jpg',
             imageBig: 'https://www.topmangal.com/wp-content/uploads/man/product_big_9.jpg',
@@ -242,7 +242,7 @@ var cart = {
         $item.classList = 'item';
 
         var $totalQuantity = document.getElementById('totalQuantity');
-        $item.innerHTML = cart.basket[cart.basket.length-1].name + ' ' + cart.basket[cart.basket.length-1].price + ' руб. ' + ' <i class="closeItem fa fa-times-circle " aria-hidden="true"></i>';
+        $item.innerHTML = cart.basket[cart.basket.length-1].name + ' ' + cart.basket[cart.basket.length-1].price + ' руб. ' + ' <i class="closeItem fa fa-times-circle" aria-hidden="true"></i>';
         $cart.insertBefore($item, $totalQuantity);
 
     },
@@ -268,21 +268,15 @@ var cart = {
 
                         cart.buildCartItem();
 
-                        for( var j = 0; j < catalog.catalogData.length; j++){
+                        for(var j = 0; j < catalog.catalogData.length; j++){
                             if(event.target.dataset.article == catalog.catalogData[j].article){
-                                var $closeItem = document.getElementsByClassName('closeItem')[i];
+                                var $closeItem = document.getElementsByClassName('closeItem')[j];
                                 $closeItem.dataset.article = event.target.dataset.article;
                                 console.log(event.target.dataset.article);
                             }
-
                         }
-
-
-                        break;
                     }
-
                 }
-
             }
         }
     },
@@ -306,6 +300,26 @@ var cart = {
             $totalPriceCart.innerHTML = '<b>ИТОГО: </b>' + cart.priceTotal + ' руб.';
 
             return alert('Корзина очищена');
+        }
+        else if(event.target.className === 'closeItem fa fa-times-circle'){
+            var $closeItem = document.getElementsByClassName('closeItem');
+
+            for(var j = 0; j < 10; j++){
+
+                if(event.target.dataset.article == catalog.catalogData[j].article){
+                    $closeItem[j].parentNode.style.display = 'none';
+                    cart.basket.splice(event.target.dataset.article, 1);
+                    cart.quantity--;
+                    cart.priceTotal -= catalog.catalogData[j].price;
+
+                    var $totalQuantity = document.getElementById('totalQuantity');
+                    $totalQuantity.innerHTML = '<b>КОЛ-ВО: </b>' + cart.quantity + ' шт.';
+
+                    var $totalPriceCart = document.getElementById('Totalprice');
+                    $totalPriceCart.innerHTML = '<b>ИТОГО: </b>' + cart.priceTotal + ' руб.';
+                    break;
+                }
+            }
         }
     }
 }
