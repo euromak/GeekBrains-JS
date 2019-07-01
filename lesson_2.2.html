@@ -61,13 +61,11 @@
 
     function action(b,c){
         if(b >= 0 && c >= 0){
-            return alert(b - c);
-        }
-        else if(b < 0 && c < 0){
-            return alert(b * c);
-        }
-        else{
-            return alert(b + c);
+            return b - c;
+        } else if(b < 0 && c < 0){
+            return b * c;
+        } else{
+            return b + c;
         }
     }
 
@@ -156,20 +154,15 @@
     function showMessage(money){
         if(money === 101){
             return alert(`Ваша сумма в 101 рубль успешно зачислена.`);
-        }
-        else if(money === 10020){
+        } else if(money === 10020){
             return alert(`Ваша сумма в 10020 рублей успешно зачислена.`);
-        }
-        else if(money === 120104){
+        } else if(money === 120104){
             return alert(`Ваша сумма в 120104 рубля успешно зачислена.`);
-        }
-        else if(money === 0){
+        } else if(money === 0){
             return alert('Ждем Вас снова!');
-        }
-        else if(money < 0){
+        } else if(money < 0){
             alert('Вы ввели некорректное значение');
-        }
-        else{
+        } else{
             return alert(`Ваша сумма в ${money} ${ruble} успешно зачислена`);
         }
     }
@@ -180,12 +173,10 @@
         if(money % 10 === 1 && !(money % 100 >= 11 && money % 100 <= 20)){
             course = 'рубль';
             return course;
-        }
-        else if(money % 10 >= 2 && money % 10 <= 4){
+        } else if(money % 10 > 2 && money % 10 < 4){
             course = 'рубля';
             return course;
-        }
-        else{
+        } else{
             course = 'рублей';
             return course;
         }
