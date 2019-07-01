@@ -38,7 +38,7 @@
     */
 
     /*
-        2. Чему будут равны переменные x и a в примере ниже? Написать почему так произошло (описать последовательность действий).
+        2. Чему будут равны переменные x и a в примере ниже? Написать почему так произошло.
         let a = 2;
         let x = 1 + (a *= 2);
     */
@@ -100,6 +100,42 @@
     console.log(subtraction(arg1,arg2));
     console.log(multiplication(arg1,arg2));
     console.log(division(arg1,arg2));
+
+    /*
+    5. Реализовать функцию с тремя параметрами: function mathOperation(arg1, arg2, operation),
+    где arg1, arg2 – значения аргументов, operation – строка с названием операции. В зависимости от
+    переданного значения операции (использовать switch) выполнить одну из арифметических операций
+    (использовать функции из задания 4) и вернуть полученное значение.
+     */
+
+    function mathOperation(arg1, arg2, operation){
+        let result;
+
+        switch(operation){
+            case addition:
+                result = addition(arg1, arg2);
+                break;
+
+            case subtraction:
+                result = subtraction(arg1, arg2);
+                break;
+
+            case multiplication:
+                result = multiplication(arg1, arg2);
+                break;
+
+            case division:
+                result = division(arg1, arg2);
+                break;
+
+            default:
+                console.log(`Введите в качестве 3 аргумента одну из основных
+                математических операций addition/subtraction/multiplication/division`);
+                break;
+        }
+
+        return result;
+    }
 
 </script>
 </body>
