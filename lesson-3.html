@@ -40,12 +40,24 @@
     let star = '';
 
     for (let i = 0; i <= 20; i++) {
-        star += '*';
-        console.log(star);
+        star += 'x';
 
+        console.log(star);
     }
 
+    /*
+        4*. С помощью цикла while вывести все простые числа в промежутке от 0 до 100 (можно без оптимизаций).
+    */
 
+    let count = 2;
+
+    while (count < 100) {
+        if (!(count % 2 === 0) && !(count % 3 === 0) && !(count % 5 === 0) && !(count % 7 === 0)) {
+            console.log(count);
+        }
+
+        count++;
+    }
 </script>
 </body>
 </html>
