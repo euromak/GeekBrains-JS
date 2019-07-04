@@ -49,14 +49,38 @@
         4*. С помощью цикла while вывести все простые числа в промежутке от 0 до 100 (можно без оптимизаций).
     */
 
-    let count = 2;
+    // заполняем массив целыми числами от 2 до 100
+    let arr = [];
 
-    while (count < 100) {
-        if (!(count % 2 === 0) && !(count % 3 === 0) && !(count % 5 === 0) && !(count % 7 === 0)) {
-            console.log(count);
+    for (let i = 2; i < 100; i++) {
+        arr[i] = true;
+    }
+
+    // объявляем переменную с первым простым числом
+    let p = 2;
+
+    do {
+        // обозначаем составные числа - false
+        for (let i = 2 * p; i < 100; i += p) {
+            arr[i] = false;
         }
 
-        count++;
+        for (let i = p + 1; i < 100; i++) {
+            if (arr[i]) break;
+        }
+
+        p = i;
+    } while (p * p < 100);
+
+    let j = 0;
+
+    // выводим простые числа
+    while(j < arr.length) {
+        j++;
+
+        if(arr[j] === true) {
+            console.log(j);
+        }
     }
 </script>
 </body>
