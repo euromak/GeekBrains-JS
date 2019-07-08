@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson-4</title>
+</head>
+<body>
+<script>
+    'use strict';
+
+    /*
+     1. Написать функцию, преобразующую число в объект. Передавая на вход число в диапазоне [0, 999],
+        мы должны получить на выходе объект, в котором в соответствующих свойствах описаны разряды числа:
+         - единицы (в свойстве firstDigit)
+         - десятки (в свойстве secondDigit)
+         - сотни (в свойстве thirdDigit)
+        Например, для числа 45 мы должны получить следующий объект:
+
+        ```
+        {
+          firstDigit: 5,
+          secondDigit: 4,
+          thirdDigit: 0,
+        }
+        ```
+
+        Если число было передано вне [0, 999] диапазона, не целое число или вообще не число,
+        необходимо выдать соответствующее сообщение с помощью console.log и вернуть пустой объект.
+    */
+
+    let getNumber = prompt('Введите число от 0 до 999');
+
+    function convertNumber(number){
+        let i;
+        let objectNumber = {};
+
+        // проверка числа на вхождение
+        if (getNumber < 0 || getNumber > 999) {
+            alert('Вы ввели неверное значение');
+            return objectNumber;
+        } else if(getNumber == null) {
+            alert('Ввод отменен');
+            return objectNumber;
+        }
+
+        for(i = 0; i < number.length; i++) {
+            switch(number.length) {
+                case 1:
+                    objectNumber.units = +number.charAt(0);
+                    break;
+                case 2:
+                    if (i == 1) {
+                        objectNumber.decades = +number.charAt(0);
+                        objectNumber.units = +number.charAt(1);
+                    }
+                    break;
+                case 3:
+                    objectNumber.hundreds = +number.charAt(0);
+                    objectNumber.decades = +number.charAt(1);
+                    objectNumber.units = +number.charAt(2);
+                    break;
+            }
+        }
+
+        return objectNumber;
+    }
+
+    console.log(convertNumber(getNumber));
+</script>
+</body>
+</html>
