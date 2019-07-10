@@ -66,24 +66,18 @@
                     cell.className = 'cell';
 
                     // красим цвета
-                    if (i % 2 === 0 && j % 2 === 1 && j !== 9 && i !== 0) {
-                        cell.className = 'cell black';
-                    }else if (i % 2 === 1 && j % 2 === 0 && j !== 0 && i !== 9) {
+                    if ((i % 2 === 0 && j % 2 === 1 && j !== 9 && i !== 0) || (i % 2 === 1 && j % 2 === 0 && j !== 0 && i !== 9)) {
                         cell.className = 'cell black';
                     }
 
                     // заполняем номера строк
-                    if (i !== 0 && i !== 9) {
-                        if (j === 0 || j === 9) {
-                            cell.innerHTML  = this.numberRow[chessmate.numberRow.length - i];
-                        }
+                    if ((i !== 0 && i !== 9) && (j === 0 || j === 9)) {
+                        cell.innerHTML  = this.numberRow[chessmate.numberRow.length - i];
                     }
 
                     // заполняем номера колонок
-                    if (i === 0 || i === 9) {
-                        if (j !== 0 && j !== 9) {
-                            cell.textContent  = this.numberCol[j - 1];
-                        }
+                    if ((i === 0 || i === 9) && (j !== 0 && j !== 9)) {
+                        cell.textContent  = this.numberCol[j - 1];
                     }
 
                     row.appendChild(cell);
