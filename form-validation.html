@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-6 ">
+            <form>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Ваше имя</label>
+                            <input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Введите имя">
+                            <small id="emailHelp" class="form-text text-muted">Неверное имя</small>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Ваш телефон</label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="x-xxx-xxx-xx-xx">
+                            <small id="phoneHelp" class="form-text text-muted">Неверное имя</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Пароль</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="******">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Подтвердите пароль</label>
+                            <input type="password" class="form-control is-valid" id="exampleInputPassword2" placeholder="******">
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" id="getContact">ОТПРАВИТЬ</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    const form = {
+        name: [],
+        phone: [],
+        password: [],
+        passwordRepeat: [],
+        init: function() {
+            let button = document.getElementById('getContact');
+            button.addEventListener('click', form.addName);
+
+        },
+        addName: function(event) {
+            if (event.target.tagName === 'BUTTON') {
+                let name = document.getElementById('name');
+                let nameArr = form.name;
+
+                nameArr.push(name.value);
+                alert(name.value);
+                console.log(name.value);
+
+                return nameArr;
+            }
+        },
+    };
+
+    window.addEventListener('load', form.init);
+</script>
+
+</body>
+</html>
