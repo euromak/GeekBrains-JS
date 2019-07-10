@@ -19,9 +19,12 @@
         }
         .cell {
             display: flex;
+            justify-content: center;
+            align-items: center;
             width: 30px;
             height: 30px;
             box-sizing: border-box;
+            border: 1px solid black
         }
 
         .black {
@@ -34,8 +37,9 @@
     'use strict';
 
     const chessmate = {
+        numberRow: [1, 2, 3, 4, 5, 6, 7, 8],
         numberCol: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'],
-        numberRow: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+
         renderTable: function() {
             // создаем доску
             const table = document.createElement('div');
@@ -45,24 +49,34 @@
             //создаем клетки
             let getTable = document.querySelector('.table');
 
-            for (let i = 0; i <= 10; i++) {
+            for (let i = 0; i <10; i++) {
                 const row = document.createElement('div');
                 row.className = 'row';
                 getTable.appendChild(row);
 
-                for(let j = 0; j <= 10; j++) {
+                for(let j = 0; j < 10; j++) {
                     const cell = document.createElement('div');
                     cell.className = 'cell';
 
-                    if(j === 0) {
-                        cell.textContent = chessmate.numberRow[i];
+                    // красим цвета
+                    if (i % 2 === 0 && j % 2 === 1 && j !== 9 && i !== 0) {
+                        cell.className = 'cell black';
+                    }else if (i % 2 === 1 && j % 2 === 0 && j !== 0 && i !== 9) {
+                        cell.className = 'cell black';
                     }
 
-                    // заполняем цвета
-                    if (i % 2 === 0 && j % 2 === 1 && 0 < i && i < 10){
-                        cell.className = 'cell black';
-                    }else if (i % 2 === 1 && j % 2 === 0 && 0 < j && j < 10){
-                        cell.className = 'cell black';
+                    // заполняем номера строк
+                    if (i !== 0 && i !== 9) {
+                        if (j === 0 || j === 9) {
+                            cell.innerHTML  = this.numberRow[chessmate.numberRow.length - i];
+                        }
+                    }
+
+                    // заполняем номера колонок
+                    if (i === 0 || i === 9) {
+                        if (j !== 0 && j !== 9) {
+                            cell.textContent  = this.numberCol[j - 1];
+                        }
                     }
 
                     row.appendChild(cell);
@@ -72,7 +86,7 @@
         },
     };
 
-    window.addEventListener('load', chessmate.renderTable);
+    window.addEventListener('load', () => chessmate.renderTable());
 </script>
 </body>
 </html>
