@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>chessmate</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+        }
+        .table {
+            display: flex;
+            flex-direction: column;
+            margin-top: 50px;
+            border: 1px solid black;
+        }
+        .row {
+            display: flex;
+        }
+        .cell {
+            display: flex;
+            width: 30px;
+            height: 30px;
+            box-sizing: border-box;
+        }
+
+        .black {
+            background: black;
+        }
+    </style>
+</head>
+<body>
+<script>
+    'use strict';
+
+    const chessmate = {
+        numberCol: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'],
+        numberRow: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        renderTable: function() {
+            // создаем доску
+            const table = document.createElement('div');
+            table.className = 'table';
+            document.body.appendChild(table);
+
+            //создаем клетки
+            let getTable = document.querySelector('.table');
+
+            for (let i = 0; i <= 10; i++) {
+                const row = document.createElement('div');
+                row.className = 'row';
+                getTable.appendChild(row);
+
+                for(let j = 0; j <= 10; j++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'cell';
+
+                    if(j === 0) {
+                        cell.textContent = chessmate.numberRow[i];
+                    }
+
+                    // заполняем цвета
+                    if (i % 2 === 0 && j % 2 === 1 && 0 < i && i < 10){
+                        cell.className = 'cell black';
+                    }else if (i % 2 === 1 && j % 2 === 0 && 0 < j && j < 10){
+                        cell.className = 'cell black';
+                    }
+
+                    row.appendChild(cell);
+                }
+
+            }
+        },
+    };
+
+    window.addEventListener('load', chessmate.renderTable);
+</script>
+</body>
+</html>
