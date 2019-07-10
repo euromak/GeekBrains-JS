@@ -28,7 +28,12 @@
         }
 
         .black {
-            background: black;
+            background: sandybrown;
+        }
+        
+        .figures {
+            font-size: 30px;
+            font-weight: bolder;
         }
     </style>
 </head>
@@ -37,8 +42,10 @@
     'use strict';
 
     const chessmate = {
-        numberRow: [1, 2, 3, 4, 5, 6, 7, 8],
+        numberRow: ['1', '2', '3', '4', '5', '6', '7', '8'],
         numberCol: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'],
+        figuresWhite: ['&#9814;', '&#9816;', '&#9815;', '&#9813;', '&#9812;', '&#9815;', '&#9816;', '&#9814;'],
+        figuresBlack: ['&#9820;', '&#9822;', '&#9821;', '&#9819;', '&#9818;', '&#9821;', '&#9822;', '&#9820;',],
 
         renderTable: function() {
             // создаем доску
@@ -49,7 +56,7 @@
             //создаем клетки
             let getTable = document.querySelector('.table');
 
-            for (let i = 0; i <10; i++) {
+            for (let i = 0; i < 10; i++) {
                 const row = document.createElement('div');
                 row.className = 'row';
                 getTable.appendChild(row);
@@ -84,9 +91,55 @@
 
             }
         },
+        setFigures: function() {
+            const pawnsWhite = document.querySelector('.row:nth-child(8)');
+            const figuresWhite = document.querySelector('.row:nth-child(9)');
+            const pawnsBlack = document.querySelector('.row:nth-child(3)');
+            const figuresBlack = document.querySelector('.row:nth-child(2)');
+
+            // расставляем белые пешки
+            for (let i = 0; i < pawnsWhite.children.length; i++) {
+
+                if (i > 0 && i < 9) {
+                    pawnsWhite.children[i].innerHTML = '&#9817;';
+                    pawnsWhite.children[i].classList.add('figures');
+                }
+            }
+
+            // расставляем черные пешки
+            for (let i = 0; i < pawnsBlack.children.length; i++) {
+
+                if (i > 0 && i < 9) {
+                    pawnsBlack.children[i].innerHTML = '&#9823;';
+                    pawnsBlack.children[i].classList.add('figures');
+                }
+            }
+
+            // расставляем белые большие фигуры
+            for (let i = 0; i < figuresWhite.children.length; i++) {
+
+                if (i > 0 && i < 9) {
+                    figuresWhite.children[i].innerHTML = this.figuresWhite[i-1];
+                    figuresWhite.children[i].classList.add('figures');
+                }
+
+            }
+
+            // расставляем черные большие фигуры
+            for (let i = 0; i < figuresBlack.children.length; i++) {
+
+                if (i > 0 && i < 9) {
+                    figuresBlack.children[i].innerHTML = this.figuresBlack[i-1];
+                    figuresBlack.children[i].classList.add('figures');
+                }
+
+            }
+        },
     };
 
     window.addEventListener('load', () => chessmate.renderTable());
+    window.addEventListener('load', () => chessmate.setFigures());
+
 </script>
 </body>
 </html>
