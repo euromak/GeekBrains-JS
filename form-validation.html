@@ -17,7 +17,7 @@
                             <input type="text" class="form-control" id="name" placeholder="введите имя">
                             <small id="nameHelp" class="form-text text-muted">min: 1 символ - max: 50 символов</small>
                             <div class="valid-feedback">Это имя доступно!</div>
-                            <div class="invalid-feedback">Вы ввели неверно количество символов!</div>
+                            <div class="invalid-feedback">Вы ввели неверное количество символов!</div>
                         </div>
                     </div>
                     <div class="col">
@@ -26,7 +26,7 @@
                             <input type="text" class="form-control" id="phone" placeholder="xxxxxxxxxxx">
                             <small id="phoneHelp" class="form-text text-muted">11 символов</small>
                             <div class="valid-feedback">Вы ввели верное кол-во символов</div>
-                            <div class="invalid-feedback">Вы ввели неверно количество символов!</div>
+                            <div class="invalid-feedback">Вы ввели неверный формат телефона!</div>
                         </div>
                     </div>
                 </div>
@@ -37,7 +37,7 @@
                             <label for="pass">Пароль</label>
                             <input type="password" class="form-control" id="pass" placeholder="******">
                             <small id="passHelp" class="form-text text-muted">min: 5 символ - max: 50 символов</small>
-                            <div class="valid-feedback">Сильный пароль</div>
+                            <div class="valid-feedback">Безопасный пароль</div>
                             <div class="invalid-feedback">Вы ввели неверно количество символов!</div>
                         </div>
                     </div>
@@ -47,7 +47,7 @@
                             <input type="password" class="form-control" id="passRepeat" placeholder="******">
                             <small id="passRepeatHelp" class="form-text text-muted">min: 5 символ - max: 50 символов</small>
                             <div class="valid-feedback">Пароль совпадает</div>
-                            <div class="invalid-feedback">Вы ввели неверно количество символов!</div>
+                            <div class="invalid-feedback">Пароль не совпадает!</div>
                         </div>
                     </div>
                 </div>
@@ -67,35 +67,86 @@
         button.addEventListener('click', validation);
 
         function validation(event){
+
             event.preventDefault();
 
             // проверка символов поля с именем
-            if (getName.value.length < 3 || getName.value.length > 50) {
-                getName.classList.add('is-invalid');
-            } else{
-                getName.classList.add('is-valid');
+
+            function validName() {
+                // очистка подсказок
+                getName.classList.remove('is-invalid');
+                getName.classList.remove('is-valid');
+
+                if (getName.value.length < 3 || getName.value.length > 50) {
+                    getName.classList.add('is-invalid');
+
+                } else{
+                    getName.classList.add('is-valid');
+                    return true;
+                }
             }
+
+            validName();
 
             // проверка символов поля с телефоном
-            if (getPhone.value.length !== 11) {
-                getPhone.classList.toggle('is-invalid');
-            } else {
-                getPhone.classList.add('is-valid');
+
+            function validPhone() {
+                // очистка подсказок
+                getPhone.classList.remove('is-invalid');
+                getPhone.classList.remove('is-valid');
+
+                if (getPhone.value.length !== 11) {
+                    getPhone.classList.add('is-invalid');
+                } else {
+                    getPhone.classList.add('is-valid');
+                    return true;
+                }
             }
+
+            validPhone();
 
             // проверка символов поля с паролем
-            if (getPass.value.length < 5 || getPass.value.length > 50) {
-                getPass.classList.add('is-invalid');
-            } else {
-                getPass.classList.add('is-valid');
-            }
+
+            function validPass() {
+                // очистка подсказок
+                getPass.classList.remove('is-invalid');
+                getPass.classList.remove('is-valid');
+
+                if (getPass.value.length < 5 || getPass.value.length > 50) {
+                    getPass.classList.add('is-invalid');
+                } else {
+                    getPass.classList.add('is-valid');
+                    return true;
+                }
+             }
+
+            validPass();
 
             // проверка символов поля с подтверждением пароля
-            if ((getPassRepeat.value === getPass.value) && !(getPassRepeat.value === "")) {
-                getPassRepeat.classList.add('is-valid');
-            } else  {
-                getPassRepeat.classList.add('is-invalid');
+
+            function validPassRepeat() {
+                // очистка подсказок
+                getPassRepeat.classList.remove('is-invalid');
+                getPassRepeat.classList.remove('is-valid');
+
+                if ((getPassRepeat.value === getPass.value) && !(getPassRepeat.value === "")) {
+                    getPassRepeat.classList.add('is-valid');
+                    return true;
+                } else  {
+                    getPassRepeat.classList.add('is-invalid');
+                }
             }
+
+            validPassRepeat();
+
+            // вывод сообщения об успешной регистрации
+            function message() {
+                if(validPassRepeat() && validPass() && validPhone() && validName()  === true) {
+                    alert('Вы успешно зарегистрировались!');
+                }
+            }
+
+            message();
         }
     }
 
