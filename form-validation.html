@@ -7,22 +7,26 @@
 </head>
 <body>
 <div class="container">
-    <div class="row d-flex justify-content-center">
+    <div class="row d-flex justify-content-center mt-4">
         <div class="col-md-6 ">
             <form>
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Ваше имя</label>
-                            <input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Введите имя">
-                            <small id="emailHelp" class="form-text text-muted">Неверное имя</small>
+                            <label for="name">Ваше имя</label>
+                            <input type="text" class="form-control" id="name" placeholder="введите имя">
+                            <small id="nameHelp" class="form-text text-muted">min: 1 символ - max: 50 символов</small>
+                            <div class="valid-feedback">Это имя доступно!</div>
+                            <div class="invalid-feedback">Вы ввели неверно количество символов!</div>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Ваш телефон</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="x-xxx-xxx-xx-xx">
-                            <small id="phoneHelp" class="form-text text-muted">Неверное имя</small>
+                            <label for="phone">Ваш телефон</label>
+                            <input type="text" class="form-control" id="phone" placeholder="xxxxxxxxxxx">
+                            <small id="phoneHelp" class="form-text text-muted">11 символов</small>
+                            <div class="valid-feedback">Вы ввели верное кол-во символов</div>
+                            <div class="invalid-feedback">Вы ввели неверно количество символов!</div>
                         </div>
                     </div>
                 </div>
@@ -30,48 +34,72 @@
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Пароль</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="******">
+                            <label for="pass">Пароль</label>
+                            <input type="password" class="form-control" id="pass" placeholder="******">
+                            <small id="passHelp" class="form-text text-muted">min: 5 символ - max: 50 символов</small>
+                            <div class="valid-feedback">Сильный пароль</div>
+                            <div class="invalid-feedback">Вы ввели неверно количество символов!</div>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Подтвердите пароль</label>
-                            <input type="password" class="form-control is-valid" id="exampleInputPassword2" placeholder="******">
+                            <label for="passRepeat">Подтвердите пароль</label>
+                            <input type="password" class="form-control" id="passRepeat" placeholder="******">
+                            <small id="passRepeatHelp" class="form-text text-muted">min: 5 символ - max: 50 символов</small>
+                            <div class="valid-feedback">Пароль совпадает</div>
+                            <div class="invalid-feedback">Вы ввели неверно количество символов!</div>
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary" id="getContact">ОТПРАВИТЬ</button>
+                <input type="submit" class="btn btn-primary" id="btn">
             </form>
         </div>
     </div>
 </div>
 <script>
-    const form = {
-        name: [],
-        phone: [],
-        password: [],
-        passwordRepeat: [],
-        init: function() {
-            let button = document.getElementById('getContact');
-            button.addEventListener('click', form.addName);
+    function init() {
+        const button = document.getElementById('btn');
+        const getName = document.getElementById('name');
+        const getPhone = document.getElementById('phone');
+        const getPass = document.getElementById('pass');
+        const getPassRepeat = document.getElementById('passRepeat');
 
-        },
-        addName: function(event) {
-            if (event.target.tagName === 'BUTTON') {
-                let name = document.getElementById('name');
-                let nameArr = form.name;
+        button.addEventListener('click', validation);
 
-                nameArr.push(name.value);
-                alert(name.value);
-                console.log(name.value);
+        function validation(event){
+            event.preventDefault();
 
-                return nameArr;
+            // проверка символов поля с именем
+            if (getName.value.length < 3 || getName.value.length > 50) {
+                getName.classList.add('is-invalid');
+            } else{
+                getName.classList.add('is-valid');
             }
-        },
-    };
 
-    window.addEventListener('load', form.init);
+            // проверка символов поля с телефоном
+            if (getPhone.value.length !== 11) {
+                getPhone.classList.toggle('is-invalid');
+            } else {
+                getPhone.classList.add('is-valid');
+            }
+
+            // проверка символов поля с паролем
+            if (getPass.value.length < 5 || getPass.value.length > 50) {
+                getPass.classList.add('is-invalid');
+            } else {
+                getPass.classList.add('is-valid');
+            }
+
+            // проверка символов поля с подтверждением пароля
+            if ((getPassRepeat.value === getPass.value) && !(getPassRepeat.value === "")) {
+                getPassRepeat.classList.add('is-valid');
+            } else  {
+                getPassRepeat.classList.add('is-invalid');
+            }
+        }
+    }
+
+    window.addEventListener('load', init);
 </script>
 
 </body>
