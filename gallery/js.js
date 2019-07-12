@@ -58,14 +58,18 @@ const gallery = {
     /* Получаем контейнер для открытой картинки, в нем находим тег img и ставим ему нужный src. Если не нашли картинку
       то выводим заглушку.
     */
-    this.getScreenContainer().querySelector(`.${this.settings.openedImageClass}`).src = src;
+    let img = this.getScreenContainer().querySelector(`.${this.settings.openedImageClass}`);
+    img.src = src;
 
+    // проверка на наличие картинки на сервере
+    img.onerror = function(){
+      img.src = 'images/gallery/404.png';
+    };
 
-      if (src === undefined) {
-          this.getScreenContainer().querySelector(`.${this.settings.openedImageClass}`)
-              .src = 'images/gallery/404.png'
-      }
-
+    // ошибка в пути картники
+    if (src === undefined ) {
+        img.src = 'images/gallery/404.png';
+    }
   },
 
   /**
