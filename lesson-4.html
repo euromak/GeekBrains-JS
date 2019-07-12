@@ -41,6 +41,9 @@
         } else if(getNumber == null) {
             alert('Ввод отменен');
             return objectNumber;
+        } else if (typeof getNumber === 'string') {
+            alert('Вы ввели строчное значение');
+            return objectNumber;
         }
 
         for(i = 0; i < number.length; i++) {
@@ -48,16 +51,19 @@
                 case 1:
                     objectNumber.units = +number.charAt(0);
                     break;
+
                 case 2:
-                    if (i == 1) {
-                        objectNumber.decades = +number.charAt(0);
-                        objectNumber.units = +number.charAt(1);
-                    }
+                    objectNumber.decades = +number.charAt(0);
+                    objectNumber.units = +number.charAt(1);
                     break;
+
                 case 3:
                     objectNumber.hundreds = +number.charAt(0);
                     objectNumber.decades = +number.charAt(1);
                     objectNumber.units = +number.charAt(2);
+                    break;
+
+                default:
                     break;
             }
         }
