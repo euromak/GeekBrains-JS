@@ -1,6 +1,5 @@
 'use strict';
 
-// создаем сетку товаров
 const catalog = {
     catalogData: [
         {
@@ -68,7 +67,12 @@ const catalog = {
         },
 
     ],
-    buildGrid () {
+
+    init () {
+        this.buildGrid();
+    },
+
+    buildGrid() {
         // создаем контейнер
         const container = document.createElement('div');
         container.id = 'catalog';
@@ -106,7 +110,6 @@ const catalog = {
             button.textContent = 'ЗАКАЗАТЬ';
             productInfo.appendChild(button);
 
-
             container.appendChild(product);
         }
     },
@@ -117,17 +120,47 @@ const cart = {
     totalPrice: 0,
     totalQuantity: 0,
 
-    init () {
+    init() {
         const container = document.querySelector('#catalog');
         container.addEventListener('click', () => this.addProductToBasket(event));
 
+        this.buildCart();
     },
 
-    buildCart () {
+    buildCart() {
+        // создаем блок корзины и добавляем его перед скриптами
+        const cart = document.createElement('div');
+        cart.id = 'cart';
+        document.body.insertBefore(cart, document.body.children[1]);
 
+        // создаем блоки для названия корзины и кнопки очистить корзину
+        const cartTopBlock = document.createElement('div');
+        cartTopBlock.classList.add('cart__top-block');
+        cartTopBlock.textContent = 'КОРЗИНА';
+        cart.appendChild(cartTopBlock);
+
+        // создаем блок для вывода товаров, положенных в корзину
+        const cartMiddleBlock = document.createElement('div');
+        cartMiddleBlock.classList.add('cart__middle-block');
+        cart.appendChild(cartMiddleBlock);
+
+        // создаем блок для вывода количества и стоимости корзины
+        const cartBottomBlock = document.createElement('div');
+        cartBottomBlock.classList.add('cart__bottom-block');
+        cart.appendChild(cartBottomBlock);
+
+        const totalQuantity = document.createElement('div');
+        totalQuantity.classList.add('total-quantity');
+        totalQuantity.textContent = `КОЛ-ВО: ${this.totalQuantity} шт.`;
+        cartBottomBlock.appendChild(totalQuantity);
+
+        const totalPrice = document.createElement('div');
+        totalPrice.classList.add('total-price');
+        totalPrice.textContent = `ИТОГО: ${this.totalQuantity} руб.`;
+        cartBottomBlock.appendChild(totalPrice);
     },
 
-    addProductToBasket (event) {
+    addProductToBasket(event) {
         if (event.target.className === 'order') {
 
             // ищем в базе товар с соответствующим dataset у элемента id(в нашем случае св-во article)
@@ -142,6 +175,7 @@ const cart = {
 
                     // добавляем кол-во товаров в корзину
                     cart.totalQuantity++;
+
                     alert(`Товар: ${catalog.catalogData[i].name} добавлен в корзину`);
                 }
             }
@@ -150,8 +184,9 @@ const cart = {
 
     },
 
-    deleteProductFromBasket () {},
+    deleteProductFromBasket() {},
 
 };
-window.addEventListener('load', () => catalog.buildGrid());
+
+window.addEventListener('load', () => catalog.init());
 window.addEventListener('load', () => cart.init());
