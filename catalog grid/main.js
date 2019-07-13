@@ -129,35 +129,60 @@ const cart = {
 
     buildCart() {
         // создаем блок корзины и добавляем его перед скриптами
-        const cart = document.createElement('div');
+        let cart = document.createElement('div');
         cart.id = 'cart';
         document.body.insertBefore(cart, document.body.children[1]);
 
         // создаем блоки для названия корзины и кнопки очистить корзину
-        const cartTopBlock = document.createElement('div');
+        let cartTopBlock = document.createElement('div');
         cartTopBlock.classList.add('cart__top-block');
         cartTopBlock.textContent = 'КОРЗИНА';
         cart.appendChild(cartTopBlock);
 
         // создаем блок для вывода товаров, положенных в корзину
-        const cartMiddleBlock = document.createElement('div');
+        let cartMiddleBlock = document.createElement('div');
         cartMiddleBlock.classList.add('cart__middle-block');
         cart.appendChild(cartMiddleBlock);
 
         // создаем блок для вывода количества и стоимости корзины
-        const cartBottomBlock = document.createElement('div');
+        let cartBottomBlock = document.createElement('div');
         cartBottomBlock.classList.add('cart__bottom-block');
         cart.appendChild(cartBottomBlock);
 
-        const totalQuantity = document.createElement('div');
+        let totalQuantity = document.createElement('div');
         totalQuantity.classList.add('total-quantity');
         totalQuantity.textContent = `КОЛ-ВО: ${this.totalQuantity} шт.`;
         cartBottomBlock.appendChild(totalQuantity);
 
-        const totalPrice = document.createElement('div');
+        let totalPrice = document.createElement('div');
         totalPrice.classList.add('total-price');
-        totalPrice.textContent = `ИТОГО: ${this.totalQuantity} руб.`;
+        totalPrice.textContent = `ИТОГО: ${this.totalPrice} руб.`;
         cartBottomBlock.appendChild(totalPrice);
+    },
+
+    buildCartItem(product) {
+        // получаем блок для наполнения товаров в корзине
+        let cart = document.querySelector('.cart__middle-block');
+
+        // создаем элемент для товара и присваеваем класс
+        let item = document.createElement('div');
+        item.classList.add('item');
+
+        // cjplftv
+
+        // вносим название и цену товара
+        item.textContent = `${product.name} ${product.price} руб.`;
+
+        // получаем блок для вывода количества и стоимости корзины
+        let getTotalQuantity = document.querySelector('.total-quantity');
+        getTotalQuantity.textContent = `КОЛ-ВО ${this.totalQuantity} шт.`;
+
+        let getTotalPrice = document.querySelector('.total-price');
+        getTotalPrice.textContent = `ИТОГО: ${this.totalPrice} руб.`;
+
+        console.log(product);
+
+        cart.appendChild(item);
     },
 
     addProductToBasket(event) {
@@ -176,7 +201,10 @@ const cart = {
                     // добавляем кол-во товаров в корзину
                     cart.totalQuantity++;
 
-                    alert(`Товар: ${catalog.catalogData[i].name} добавлен в корзину`);
+                    // передаем id товара в функцию вывода корзины
+                    cart.buildCartItem(catalog.catalogData[i]);
+
+                    alert(`Товар: ${catalog.catalogData[i].name} 1 шт. добавлен в корзину`);
                 }
             }
             console.log(cart.basket, cart.totalPrice, cart.totalQuantity);
@@ -184,9 +212,12 @@ const cart = {
 
     },
 
-    deleteProductFromBasket() {},
+    deleteProductFromBasket() {
+
+    },
 
 };
 
 window.addEventListener('load', () => catalog.init());
 window.addEventListener('load', () => cart.init());
+
