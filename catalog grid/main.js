@@ -5,70 +5,70 @@ const catalog = {
     catalogData: [
         {
             name: 'Свитшот',
-            article: 1,
+            article: '1',
             price: 5000,
             image: 'https://www.topmangal.com/wp-content/uploads/man/product_1.jpg',
             imageBig: 'https://www.topmangal.com/wp-content/uploads/man/product_big_1.jpg',
         },
         {
             name: 'Пальто',
-            article: 2,
+            article: '2',
             price: 9000,
             image: 'https://www.topmangal.com/wp-content/uploads/man/product_2.jpg',
             imageBig: 'https://www.topmangal.com/wp-content/uploads/man/product_big_2.jpg',
         },
         {
             name: 'Куртка',
-            article: 3,
+            article: '3',
             price: 7500,
             image: 'https://www.topmangal.com/wp-content/uploads/man/product_3.jpg',
             imageBig: 'https://www.topmangal.com/wp-content/uploads/man/product_big_3.jpg',
         },
         {
             name: 'Поло',
-            article: 4,
+            article: '4',
             price: 4000,
             image: 'https://www.topmangal.com/wp-content/uploads/man/product_4.jpg',
             imageBig: 'https://www.topmangal.com/wp-content/uploads/man/product_big_4.jpg',
         },
         {
             name: 'Свитшот',
-            article: 5,
+            article: '5',
             price: 5000,
             image: 'https://www.topmangal.com/wp-content/uploads/man/product_5.jpg',
             imageBig: 'https://www.topmangal.com/wp-content/uploads/man/product_big_5.jpg',
         },
         {
             name: 'Куртка',
-            article: 6,
+            article: '6',
             price: 5500,
             image: 'https://www.topmangal.com/wp-content/uploads/man/product_6.jpg',
             imageBig: 'https://www.topmangal.com/wp-content/uploads/man/product_big_6.jpg',
         },
         {
             name: 'Костюм',
-            article: 7,
+            article: '7',
             price: 9000,
             image: 'https://www.topmangal.com/wp-content/uploads/man/product_7.jpg',
             imageBig: 'https://www.topmangal.com/wp-content/uploads/man/product_big_7.jpg',
         },
         {
             name: 'Куртка',
-            article: 8,
+            article: '8',
             price: 10000,
             image: 'https://www.topmangal.com/wp-content/uploads/man/product_8.jpg',
             imageBig: 'https://www.topmangal.com/wp-content/uploads/man/product_big_8.jpg',
         },
         {
             name: 'Поло',
-            article: 9,
+            article: '9',
             price: 2500,
             image: 'https://www.topmangal.com/wp-content/uploads/man/product_9.jpg',
             imageBig: 'https://www.topmangal.com/wp-content/uploads/man/product_big_9.jpg',
         },
 
     ],
-    buildGrid() {
+    buildGrid () {
         // создаем контейнер
         const container = document.createElement('div');
         container.id = 'catalog';
@@ -102,6 +102,7 @@ const catalog = {
 
             const button = document.createElement('button');
             button.classList.add('order');
+            button.dataset.article = this.catalogData[i].article;
             button.textContent = 'ЗАКАЗАТЬ';
             productInfo.appendChild(button);
 
@@ -111,4 +112,46 @@ const catalog = {
     },
 };
 
+const cart = {
+    basket: [],
+    totalPrice: 0,
+    totalQuantity: 0,
+
+    init () {
+        const container = document.querySelector('#catalog');
+        container.addEventListener('click', () => this.addProductToBasket(event));
+
+    },
+
+    buildCart () {
+
+    },
+
+    addProductToBasket (event) {
+        if (event.target.className === 'order') {
+
+            // ищем в базе товар с соответствующим dataset у элемента id(в нашем случае св-во article)
+            for (let i = 0; i < catalog.catalogData.length; i++) {
+                if (event.target.dataset.article === catalog.catalogData[i].article) {
+
+                    // добавляем товар в корзину cart.basket
+                    cart.basket.push(catalog.catalogData[i]);
+
+                    // добавляем стоимость товара в корзину
+                    cart.totalPrice += catalog.catalogData[i].price;
+
+                    // добавляем кол-во товаров в корзину
+                    cart.totalQuantity++;
+                    alert(`Товар: ${catalog.catalogData[i].name} добавлен в корзину`);
+                }
+            }
+            console.log(cart.basket, cart.totalPrice, cart.totalQuantity);
+        }
+
+    },
+
+    deleteProductFromBasket () {},
+
+};
 window.addEventListener('load', () => catalog.buildGrid());
+window.addEventListener('load', () => cart.init());
