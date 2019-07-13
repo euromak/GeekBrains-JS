@@ -127,10 +127,16 @@ const cart = {
     totalQuantity: 0,
 
     init() {
+        // подключаем функцию вывода корзины
+        this.buildCart();
+
+        // добавляем событие добавления товаров в корзину
         const container = document.querySelector('#catalog');
         container.addEventListener('click', () => this.addProductToBasket(event));
 
-        this.buildCart();
+        // добавляем событие очистки корзины
+        const cleanButton = document.querySelector('#cleanbasket');
+        cleanButton.addEventListener('click', () => this.deleteProductFromBasket(event));
     },
 
     buildCart() {
@@ -156,7 +162,7 @@ const cart = {
 
         // создаем кнопку очистить корзину
         let cleanCart = document.createElement('div');
-        cleanCart.id = 'clean-basket';
+        cleanCart.id = 'cleanbasket';
         cleanCart.innerHTML = '<i class="fa fa-trash-o" aria-hidden="true"></i>';
         cartTopBlock.appendChild(cleanCart);
 
@@ -212,6 +218,8 @@ const cart = {
     },
 
     addProductToBasket(event) {
+
+        // ловим событие по классу order
         if (event.target.className === 'order') {
 
             // ищем в базе товар с соответствующим dataset у элемента id(в нашем случае св-во article)
@@ -228,15 +236,38 @@ const cart = {
                     cart.totalQuantity++;
 
                     // передаем id товара в функцию вывода корзины
-                    cart.buildCartItem(catalog.catalogData[i]);
+                    return cart.buildCartItem(catalog.catalogData[i]);
                 }
             }
-            console.log(cart.basket, cart.totalPrice, cart.totalQuantity);
         }
 
     },
 
-    deleteProductFromBasket() {
+    deleteProductFromBasket(event) {
+
+        // ловим событие по тегу i
+        if (event.target.tagName === 'I') {
+
+            // удаляем позиции товаров из корзины
+            for (let i = cart.basket.length; i > 0; i--) {
+                let removeItem = document.querySelector('.cart__middle-block');
+                let item = document.querySelectorAll('.item');
+
+                removeItem.removeChild(item[i-1]);
+            }
+
+            // обнуляем показатели корзины
+            cart.basket.length = 0;
+            cart.totalPrice = 0;
+            cart.totalQuantity = 0;
+
+            // обновляем показатели корзины на сайте
+            let getTotalQuantity = document.querySelector('.total-quantity');
+            getTotalQuantity.textContent = `КОЛ-ВО ${this.totalQuantity} шт.`;
+
+            let getTotalPrice = document.querySelector('.total-price');
+            getTotalPrice.textContent = `ИТОГО: ${this.totalPrice} руб.`;
+        }
 
     },
 
