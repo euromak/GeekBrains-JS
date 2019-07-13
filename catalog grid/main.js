@@ -1,5 +1,11 @@
 'use strict';
 
+/**
+ *
+ * @type {{catalogData: *[], init(): void, buildGrid(): void}}
+ */
+
+
 const catalog = {
     catalogData: [
         {
@@ -136,8 +142,24 @@ const cart = {
         // создаем блоки для названия корзины и кнопки очистить корзину
         let cartTopBlock = document.createElement('div');
         cartTopBlock.classList.add('cart__top-block');
-        cartTopBlock.textContent = 'КОРЗИНА';
         cart.appendChild(cartTopBlock);
+
+        // создаем блок для иконки корзины
+        const iconCart = document.createElement('div');
+        iconCart.innerHTML = '<i class="fa fa-shopping-basket" aria-hidden="true"></i>';
+        cartTopBlock.appendChild(iconCart);
+
+        // создаем блок для названия корзины
+        const cartName = document.createElement('div');
+        cartName.textContent = 'КОРЗИНА';
+        cartTopBlock.appendChild(cartName);
+
+        // создаем кнопку очистить корзину
+        let cleanCart = document.createElement('div');
+        cleanCart.id = 'clean-basket';
+        cleanCart.innerHTML = '<i class="fa fa-trash-o" aria-hidden="true"></i>';
+        cartTopBlock.appendChild(cleanCart);
+
 
         // создаем блок для вывода товаров, положенных в корзину
         let cartMiddleBlock = document.createElement('div');
@@ -168,10 +190,14 @@ const cart = {
         let item = document.createElement('div');
         item.classList.add('item');
 
-        // cjplftv
+        // создаем блоки для цены и кол-ва b
+        let itemName = document.createElement('div');
+        itemName.textContent = product.name;
+        item.appendChild(itemName);
 
-        // вносим название и цену товара
-        item.textContent = `${product.name} ${product.price} руб.`;
+        let itemPrice = document.createElement('div');
+        itemPrice.textContent = `${product.price} руб.`;
+        item.appendChild(itemPrice);
 
         // получаем блок для вывода количества и стоимости корзины
         let getTotalQuantity = document.querySelector('.total-quantity');
@@ -180,9 +206,9 @@ const cart = {
         let getTotalPrice = document.querySelector('.total-price');
         getTotalPrice.textContent = `ИТОГО: ${this.totalPrice} руб.`;
 
-        console.log(product);
-
         cart.appendChild(item);
+
+        console.log(typeof product.price);
     },
 
     addProductToBasket(event) {
@@ -203,8 +229,6 @@ const cart = {
 
                     // передаем id товара в функцию вывода корзины
                     cart.buildCartItem(catalog.catalogData[i]);
-
-                    alert(`Товар: ${catalog.catalogData[i].name} 1 шт. добавлен в корзину`);
                 }
             }
             console.log(cart.basket, cart.totalPrice, cart.totalQuantity);
