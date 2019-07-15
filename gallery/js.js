@@ -24,6 +24,7 @@ const gallery = {
    * @param {Object} userSettings Объект настроек для галереи.
    */
   init(userSettings = {}) {
+    currentImage: '',
     // Записываем настройки, которые передал пользователь в наши настройки.
     Object.assign(this.settings, userSettings);
 
@@ -48,6 +49,8 @@ const gallery = {
     // Открываем картинку с полученным из целевого тега (data-full_image_url аттрибут).
 
     this.openImage(event.target.dataset.full_image_url);
+
+    gallery.currentImage = event.target;
   },
 
   /**
@@ -97,6 +100,9 @@ const gallery = {
     const galleryWrapperElement = document.createElement('div');
     galleryWrapperElement.classList.add(this.settings.openedImageWrapperClass);
 
+    galleryWrapperElement.addEventListener('click', () => {this.nextImage(event)});
+    galleryWrapperElement.addEventListener('click', () => {this.prevImage(event)});
+
     // Создаем контейнер занавеса, ставим ему класс и добавляем в контейнер-обертку.
     const galleryScreenElement = document.createElement('div');
     galleryScreenElement.classList.add(this.settings.openedImageScreenClass);
@@ -115,7 +121,6 @@ const gallery = {
     arrowLeft.innerHTML = '<i class="fa fa-chevron-circle-left" aria-hidden="true"></i>';
     galleryWrapperElement.appendChild(arrowLeft);
 
-
     // Создаем иконку вправо
     const arrowRight = document.createElement('div');
     arrowRight.classList.add('arrowRight');
@@ -133,7 +138,48 @@ const gallery = {
     // Возвращаем добавленный в body элемент, наш контейнер-обертку.
     return galleryWrapperElement;
   },
+  nextImage() {
+    if (event.target.className === 'fa fa-chevron-circle-right') {
+        const currentImage = document.querySelector(`.${this.settings.openedImageClass}`);
+        const images = document.getElementsByClassName('galleryPreviewsContainer');
 
+        for (let i = 0; i < images[0].children.length; i++) {
+          if (gallery.currentImage.src === images[0].children[i].src) {
+              currentImage.src = images[0].children[i+1].dataset.full_image_url;
+              gallery.currentImage = images[0].children[i+1];
+
+              break;
+          } else if (gallery.currentImage.src === images[0].children[images[0].children.length-1].src) {
+            currentImage.src = images[0].children[0].dataset.full_image_url;
+            gallery.currentImage = images[0].children[0];
+
+            break;
+          }
+      }
+    }
+  },
+
+  prevImage() {
+    if (event.target.className === 'fa fa-chevron-circle-left') {
+        const currentImage = document.querySelector(`.${this.settings.openedImageClass}`);
+        const images = document.getElementsByClassName('galleryPreviewsContainer');
+
+        for (let i = 0; i < images[0].children.length; i++) {
+            if ((gallery.currentImage.src === images[0].children[i].src) && (gallery.currentImage.src !== images[0].children[0].src)) {
+                currentImage.src = images[0].children[i-1].dataset.full_image_url;
+                gallery.currentImage = images[0].children[i-1];
+                console.log(gallery.currentImage);
+
+                break;
+            } else if (gallery.currentImage.src === images[0].children[images[0].children.length - 4].src) {
+                currentImage.src = images[0].children[1].dataset.full_image_url;
+                gallery.currentImage = images[0].children[images[0].children.length-1];
+
+                break;
+            }
+        }
+      }
+  },
   /**
    * Закрывает (удаляет) контейнер для открытой картинки.
    */
