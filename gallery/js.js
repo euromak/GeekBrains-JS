@@ -187,7 +187,7 @@ const gallery = {
                 console.log(gallery.currentImage);
 
                 break;
-            } else if (gallery.currentImage.src === images[0].children[images[0].children.length - 4].src) {
+            } else if (gallery.currentImage.src === images[0].children[images[0].children.length - images[0].children.length].src) {
                 currentImage.src = images[0].children[1].dataset.full_image_url;
                 gallery.currentImage = images[0].children[images[0].children.length-1];
 
