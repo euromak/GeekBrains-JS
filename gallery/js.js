@@ -109,6 +109,19 @@ const gallery = {
     closeImageElement.addEventListener('click', () => this.close());
     galleryWrapperElement.appendChild(closeImageElement);
 
+    // Создаем иконку влево
+    const arrowLeft = document.createElement('div');
+    arrowLeft.classList.add('arrowLeft');
+    arrowLeft.innerHTML = '<i class="fa fa-chevron-circle-left" aria-hidden="true"></i>';
+    galleryWrapperElement.appendChild(arrowLeft);
+
+
+    // Создаем иконку вправо
+    const arrowRight = document.createElement('div');
+    arrowRight.classList.add('arrowRight');
+    arrowRight.innerHTML = '<i class="fa fa-chevron-circle-right" aria-hidden="true"></i>';
+    galleryWrapperElement.appendChild(arrowRight);
+
     // Создаем картинку, которую хотим открыть, ставим класс и добавляем ее в контейнер-обертку.
     const image = new Image();
     image.classList.add(this.settings.openedImageClass);
