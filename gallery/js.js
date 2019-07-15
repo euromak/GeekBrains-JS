@@ -24,6 +24,7 @@ const gallery = {
    * @param {Object} userSettings Объект настроек для галереи.
    */
   init(userSettings = {}) {
+    // свойство для индекса картинки с информацией о большой картинке(data-full_image_url), по которой кликнули
     currentImage: '',
     // Записываем настройки, которые передал пользователь в наши настройки.
     Object.assign(this.settings, userSettings);
@@ -138,11 +139,19 @@ const gallery = {
     // Возвращаем добавленный в body элемент, наш контейнер-обертку.
     return galleryWrapperElement;
   },
+
+  /**
+   * Переключение картинок по клику на стрелку вправо
+   */
   nextImage() {
     if (event.target.className === 'fa fa-chevron-circle-right') {
         const currentImage = document.querySelector(`.${this.settings.openedImageClass}`);
         const images = document.getElementsByClassName('galleryPreviewsContainer');
 
+        /* Ищем в массиве маленьких картинок, элемент с одинаковым значением в атрибуте dataset. Берем у следующего
+        * элемента в этом массиве src и перезаписываем значение у текущей картинки. Запоминаем новый элемент в свойстве
+        * this.currentImage.
+        * */
         for (let i = 0; i < images[0].children.length; i++) {
           if (gallery.currentImage.src === images[0].children[i].src) {
               currentImage.src = images[0].children[i+1].dataset.full_image_url;
@@ -158,14 +167,21 @@ const gallery = {
       }
     }
   },
-
+  /**
+   * Переключение картинок по клику на стрелку влево
+   */
   prevImage() {
     if (event.target.className === 'fa fa-chevron-circle-left') {
         const currentImage = document.querySelector(`.${this.settings.openedImageClass}`);
         const images = document.getElementsByClassName('galleryPreviewsContainer');
 
+        /* Ищем в массиве маленьких картинок, элемент с одинаковым значением в атрибуте dataset. Берем у следующего
+        * элемента в этом массиве src и перезаписываем значение у текущей картинки. Запоминаем новый элемент в свойстве
+        * this.currentImage.
+        * */
         for (let i = 0; i < images[0].children.length; i++) {
-            if ((gallery.currentImage.src === images[0].children[i].src) && (gallery.currentImage.src !== images[0].children[0].src)) {
+            if ((gallery.currentImage.src === images[0].children[i].src)
+                && (gallery.currentImage.src !== images[0].children[0].src)) {
                 currentImage.src = images[0].children[i-1].dataset.full_image_url;
                 gallery.currentImage = images[0].children[i-1];
                 console.log(gallery.currentImage);
