@@ -356,6 +356,58 @@ const status = {
 };
 
 /**
+ * Объект счетчика. Подсчитывает очки пользователя.
+ * @property {int} count Очки пользователя
+ * @property {HTMLElement} countEl DOM-элемент для вставки числа отображающего количество очков пользователя.
+ *
+ */
+const score = {
+  count: null,
+  countEL: null,
+
+  /**
+   * Инициализацирует счетчик.
+   */
+  init() {
+  // Находим элемент где будут отображаться очки пользователя
+  // и записываем в свойство countEl.
+  this.countEl = document.getElementById('score-count');
+
+  // Вызываем метод drop текущего объекта чтоб сбросить счетчик.
+  this.drop();
+  },
+
+  /**
+   * Инкрементирует счетчик.
+   */
+  increment() {
+    // Инкрементируем счет пользователя
+    this.count++;
+    // Вызываем метод render текущего объекта
+    this.render();
+  },
+
+  /**
+   * Сбрасывает счетчик.
+   */
+  drop() {
+  // Ставим счет в 0.
+  this.count = 0;
+  // Вызываем метод render текущего объекта
+  this.render();
+  },
+
+  /**
+   * Отображает количество очков пользователю.
+   */
+  render() {
+    // Отображаем счет пользователя в DOM-элемент.
+    this.countEl.textContent = `${this.count}`;
+  }
+};
+
+
+/**
  * Объект игры.
  * @property {settings} settings Настройки игры.
  * @property {map} map Объект отображения.
@@ -370,6 +422,7 @@ const game = {
   snake,
   food,
   status,
+  score,
   tickInterval: null,
 
   /**
@@ -390,6 +443,8 @@ const game = {
     }
     // Инициализируем карту.
     this.map.init(this.config.getRowsCount(), this.config.getColsCount());
+    // Инициализируем счетчик съеденной еды
+    this.score.init();
     // Устанавливаем обработчики событий.
     this.setEventHandlers();
     // Ставим игру в начальное положение.
@@ -458,6 +513,8 @@ const game = {
     if (this.food.isOnPoint(this.snake.getNextStepHeadPoint())) {
       // Прибавляем к змейке ячейку.
       this.snake.growUp();
+      // Прибавляем очко за съеденную еду
+      this.score.increment();
       // Ставим еду в свободную ячейку.
       this.food.setCoordinates(this.getRandomFreeCoordinates());
       // Если выиграли, завершаем игру.
@@ -554,6 +611,8 @@ const game = {
   newGameClickHandler() {
     // Ставим игру в начальное положение.
     this.reset();
+    // Обнуляем счетчик очков игры
+    this.score.drop();
   },
 
   /**
@@ -637,4 +696,4 @@ const game = {
 };
 
 // При загрузке страницы инициализируем игру.
-window.onload = game.init({speed: 5});
+window.onload = game.init({speed: 5, winFoodCount: 5});
