@@ -174,11 +174,15 @@ const map = {
  * @property {{x: int, y: int}[]} body Массив с точками тела змейки.
  * @property {string} direction Направление, куда пользователь направил змейку.
  * @property {string} lastStepDirection Направление, куда сходила змейка прошлый раз.
+ * @property {{x: int, y: int}[] maxX предел поля по оси X.
+ * @property {{x: int, y: int}[] maxX предел поля по оси Y.
  */
 const snake = {
   body: null,
   direction: null,
   lastStepDirection: null,
+  maxX: null,
+  maxY: null,
 
   /**
    * Инициализирует змейку, откуда она будет начинать и ее направление.
@@ -369,12 +373,11 @@ const score = {
    * Инициализацирует счетчик.
    */
   init() {
-  // Находим элемент где будут отображаться очки пользователя
-  // и записываем в свойство countEl.
-  this.countEl = document.getElementById('score-count');
-
-  // Вызываем метод drop текущего объекта чтоб сбросить счетчик.
-  this.drop();
+    // Находим элемент где будут отображаться очки пользователя
+    // и записываем в свойство countEl.
+    this.countEl = document.getElementById('score-count');
+    // Вызываем метод drop текущего объекта чтоб сбросить счетчик.
+    this.drop();
   },
 
   /**
@@ -391,10 +394,10 @@ const score = {
    * Сбрасывает счетчик.
    */
   drop() {
-  // Ставим счет в 0.
-  this.count = 0;
-  // Вызываем метод render текущего объекта
-  this.render();
+    // Ставим счет в 0.
+    this.count = 0;
+    // Вызываем метод render текущего объекта
+    this.render();
   },
 
   /**
@@ -688,8 +691,8 @@ const game = {
     const nextHeadPoint = this.snake.getNextStepHeadPoint();
     // Змейка может сделать шаг если следующая точка не на теле змейки и точка внутри игрового поля.
     return !this.snake.isOnPoint(nextHeadPoint) &&
-      nextHeadPoint.x < this.config.getColsCount() &&
-      nextHeadPoint.y < this.config.getRowsCount() &&
+      /*nextHeadPoint.x < this.config.getColsCount() &&
+      nextHeadPoint.y < this.config.getRowsCount() &&*/
       nextHeadPoint.x >= 0 &&
       nextHeadPoint.y >= 0;
   },
