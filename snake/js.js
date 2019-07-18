@@ -690,13 +690,14 @@ const game = {
     // Получаем следующую точку головы змейки в соответствии с текущим направлением.
     const nextHeadPoint = this.snake.getNextStepHeadPoint();
     // Змейка может сделать шаг если следующая точка не на теле змейки и точка внутри игрового поля.
-    return !this.snake.isOnPoint(nextHeadPoint) &&
-      /*nextHeadPoint.x < this.config.getColsCount() &&
-      nextHeadPoint.y < this.config.getRowsCount() &&*/
+    return !this.snake.isOnPoint(nextHeadPoint);
+      /*&& nextHeadPoint.x < this.config.getColsCount() &&
+      nextHeadPoint.y < this.config.getRowsCount() &&
       nextHeadPoint.x >= 0 &&
       nextHeadPoint.y >= 0;
+      */
   },
 };
 
 // При загрузке страницы инициализируем игру.
-window.onload = game.init({speed: 5, winFoodCount: 5});
+window.onload = game.init({speed: 5, winFoodCount: 5, rowsCount: 10, colsCount: 10});
