@@ -145,12 +145,10 @@ const table = {
     buildTable() {
       const tableHead = document.getElementById('tableHead');
       const tableBody = document.getElementById('tableBody');
-      const tableHeadRow = document.createElement('tr');
-
 
       // создаем ячейки для шапки таблицы и заполняем названиями
       for (let i = 0; i < 1; i++) {
-
+          const tableHeadRow = document.createElement('tr');
           for (let value in products[i]){
               const tableCol = document.createElement('td');
               tableCol.setAttribute('scope', 'col');
@@ -159,6 +157,7 @@ const table = {
               tableHeadRow.appendChild(tableCol);
           }
 
+          tableHead.appendChild(tableHeadRow);
       }
 
       for ( let i = 0; i < products.length; i++) {
@@ -168,14 +167,39 @@ const table = {
               const tableCol = document.createElement('td');
               tableCol.textContent = products[i][value];
               tableBodyRow.appendChild(tableCol);
-              console.log(products[i][value]);
           }
+
           tableBody.appendChild(tableBodyRow);
       }
+    },
 
-      tableHead.appendChild(tableHeadRow);
+    clearTable() {
+        const tableHead = document.getElementById('tableHead');
+        const tableBody = document.getElementById('tableBody');
+        tableHead.removeChild(tableHead.children[0]);
 
+        for (let i = products.length; i > 0; i--) {
+            tableBody.removeChild(tableBody.children[i-1]);
+        }
 
+    },
+
+    sortPriceUp() {
+        this.clearTable();
+
+        function comparePrice(a,b) {return a.price - b.price};
+        products.sort(comparePrice);
+
+        this.buildTable();
+    },
+
+    sortPriceDown() {
+        this.clearTable();
+
+        function comparePrice(a,b) {return b.price - a.price};
+        products.sort(comparePrice);
+
+        this.buildTable();
     },
 };
 
