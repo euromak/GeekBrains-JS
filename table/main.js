@@ -177,7 +177,7 @@ const table = {
         const tableHead = document.getElementById('tableHead');
         const tableBody = document.getElementById('tableBody');
         tableHead.removeChild(tableHead.children[0]);
-
+        console.log();
         for (let i = products.length; i > 0; i--) {
             tableBody.removeChild(tableBody.children[i-1]);
         }
@@ -187,8 +187,7 @@ const table = {
     sortPriceUp() {
         this.clearTable();
 
-        function comparePrice(a,b) {return a.price - b.price};
-        products.sort(comparePrice);
+        products.sort((a,b) => {return a.price - b.price});
 
         this.buildTable();
     },
@@ -196,10 +195,75 @@ const table = {
     sortPriceDown() {
         this.clearTable();
 
-        function comparePrice(a,b) {return b.price - a.price};
-        products.sort(comparePrice);
+        products.sort((a,b) => {return b.price - a.price});
 
         this.buildTable();
+    },
+
+    sortNameUp() {
+        this.clearTable();
+        function compareName(a,b) {
+            if(a.name > b.name) {
+                return 1;
+            } else if (a.name < b.name) {
+                return -1;
+            }
+        }
+        products.sort(compareName);
+
+        this.buildTable();
+    },
+
+    sortNameDown() {
+        this.clearTable();
+        function compareName(a,b) {
+            if(a.name < b.name) {
+                return 1;
+            } else if (a.name > b.name) {
+                return -1;
+            }
+        }
+        products.sort(compareName);
+
+        this.buildTable();
+    },
+
+    searchQuery(query) {
+      this.clearTable();
+
+        const tableHead = document.getElementById('tableHead');
+        const tableBody = document.getElementById('tableBody');
+
+        // создаем ячейки для шапки таблицы и заполняем названиями
+        for (let i = 0; i < 1; i++) {
+            const tableHeadRow = document.createElement('tr');
+            for (let value in products[i]){
+                const tableCol = document.createElement('td');
+                tableCol.setAttribute('scope', 'col');
+                tableCol.textContent = value;
+
+                tableHeadRow.appendChild(tableCol);
+            }
+
+            tableHead.appendChild(tableHeadRow);
+        }
+
+        const tableBodyRow = document.createElement('tr');
+
+        for (let i = 0; i < products.length; i++){
+            if(query === products[i].article || query === products[i].price || query === products[i].name || query === products[i].sex){
+                const tableBodyRow = document.createElement('tr');
+
+                for(let key in products[i]){
+                    const tableCol = document.createElement('td');
+                    tableCol.textContent = products[i][key];
+                    tableBodyRow.appendChild(tableCol);
+                }
+                tableBody.appendChild(tableBodyRow);
+            }
+        }
+
+
     },
 };
 
