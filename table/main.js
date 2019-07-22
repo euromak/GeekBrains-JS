@@ -138,9 +138,45 @@ const products = [
 ];
 
 const table = {
-    init () {
-        alert('tt');
-    }
+    init() {
+        this.buildTable();
+    },
+
+    buildTable() {
+      const tableHead = document.getElementById('tableHead');
+      const tableBody = document.getElementById('tableBody');
+      const tableHeadRow = document.createElement('tr');
+
+
+      // создаем ячейки для шапки таблицы и заполняем названиями
+      for (let i = 0; i < 1; i++) {
+
+          for (let value in products[i]){
+              const tableCol = document.createElement('td');
+              tableCol.setAttribute('scope', 'col');
+              tableCol.textContent = value;
+
+              tableHeadRow.appendChild(tableCol);
+          }
+
+      }
+
+      for ( let i = 0; i < products.length; i++) {
+          const tableBodyRow = document.createElement('tr');
+
+          for (let value in products[i]) {
+              const tableCol = document.createElement('td');
+              tableCol.textContent = products[i][value];
+              tableBodyRow.appendChild(tableCol);
+              console.log(products[i][value]);
+          }
+          tableBody.appendChild(tableBodyRow);
+      }
+
+      tableHead.appendChild(tableHeadRow);
+
+
+    },
 };
 
 window.addEventListener('load', () => {table.init();});
