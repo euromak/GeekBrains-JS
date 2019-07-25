@@ -3,10 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <title>Интернет-магазин</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: helvetica;
+        }
+
+        *:focus {
+            outline: none;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            width: 100%;
+            height: 50px;
+            background-color: white;
+        }
+
+        .btn-cart {
+            height: 40px;
+            margin-right: 10px;
+            padding: 0 20px;
+            border: none;
+            font-weight: bold;
+            background-color: #f16d7f;
+            color: white;
+            cursor: pointer;
+        }
+        
+        .btn-cart:hover {
+            background-color: #fff;
+            border: 1px solid #f16d7f;
+            color: #f16d7f;
+        }
+
+        .products {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .product-item {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .by-btn {
+            position: absolute;
+            top: 290px;
+            right: 10px;
+            padding: 5px 10px;
+            font-weight: bold;
+            background-color: white;
+            border: 1px solid palevioletred;
+            color: palevioletred;
+            cursor: pointer;
+        }
+
+        .by-btn:hover {
+            color: white;
+            background-color: palevioletred;
+        }
+    </style>
 </head>
 <body>
 <header>
-    <button class="btn-cart" type="button">Корзина</button>
+    <button class="btn-cart" type="button">КОРЗИНА</button>
 </header>
 <main>
     <div class="products"></div>
