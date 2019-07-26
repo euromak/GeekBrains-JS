@@ -192,9 +192,21 @@ const cart = {
         // получаем блок для наполнения товаров в корзине
         let cart = document.querySelector('.cart__middle-block');
 
+        // функция подсчета добавленных товаров
+        let count = 0;
+
+        for(let key in this.basket) {
+
+            if (this.basket[key].article === product.article)
+                count++;
+                console.log(count);
+                console.log(this.basket[key]);
+        }
+
         // создаем элемент для товара и присваеваем класс
         let item = document.createElement('div');
         item.classList.add('item');
+        item.dataset.article = product.article;
 
         // создаем блоки для цены и кол-ва b
         let itemName = document.createElement('div');
@@ -214,7 +226,7 @@ const cart = {
 
         cart.appendChild(item);
 
-        console.log(typeof product.price);
+
     },
 
     addProductToBasket(event) {
