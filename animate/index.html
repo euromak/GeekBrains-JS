@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
+        @import url('https://fonts.googleapis.com/css?family=Jura:300,400,500,600,700&display=swap&subset=cyrillic');
+
         * {
             margin: 0;
             padding: 0;
-            font-family: verdana;
+            font-family: 'Jura', sans-serif;
         }
 
         a {
@@ -57,11 +59,15 @@
             list-style-type: none;
         }
 
+        #navigation a {
+            font-size: 1.2em;
+        }
+
         #navigation a:hover {
             color: #592E9D;
             transition: color 0.4s;
         }
-        
+
         .catalog {
             width: 100%;
             height: 1080px;
@@ -78,78 +84,114 @@
             box-shadow: 0 1px 10px 1px rgba(0, 0, 0, .5);
         }
 
-        @keyframes hide-nav-block {
+        .slider {
+            position: relative;
+        }
+
+        .slider h1 {
+            position: absolute;
+            left: 50px;
+            top: 160px;
+            font-size: 2.4em;
+            font-weight: 700;
+            animation: entry 2s forwards, color 4s linear 3s infinite;
+            text-shadow: 2px 2px 4px #DF1E8D;
+        }
+
+        @keyframes entry {
             0% {
-                transform: translateY(0%);
+                opacity: 0;
+                transform: translateX(-50%);
+                text-shadow: none;
             }
+
             50% {
                 opacity: 0.5;
-                transform: translateY(-50%);
+                transform: skew(25deg);
+                text-shadow: none;
             }
             100% {
-                opacity: 0;
-                transform: translateY(-100%);
+                opacity: 1;
+                transform: translateX(0%);
+                text-shadow: 2px 2px 4px green;
             }
         }
+
+        @keyframes color {
+            0% {
+                text-shadow: 2px 2px 4px #DF1E8D;
+            }
+            50% {
+                text-shadow: 2px 2px 4px #005F93;
+            }
+            100% {
+                text-shadow: 2px 2px 4px #5CBF07;
+            }
+        }
+
     </style>
 </head>
 <body>
-    <header>
-        <div class="container header">
-            <div class="row header__top">
-                <div>E-mail: <a href="mailto:ermakov2016@yandex.ru">ermakov2016@yandex.ru</a></div>
-                <div>Телефон: <a href="tel:+79153328186">8-915-332-81-86</a></div>
-            </div>
-            <div class="row header__bottom">
-                <ul id="navigation">
-                    <li><a href="#">Главная</a></li>
-                    <li><a href="#">Портфолио</a></li>
-                    <li><a href="#">Услуги</a></li>
-                    <li><a href="#">Контакты</a></li>
-                </ul>
-            </div>
+<header>
+    <div class="container header">
+        <div class="row header__top">
+            <div>E-mail: <a href="mailto:ermakov2016@yandex.ru">ermakov2016@yandex.ru</a></div>
+            <div>Телефон: <a href="tel:+79153328186">8-915-332-81-86</a></div>
         </div>
-    </header>
-    <section>
-        <div class="container slider"></div>
-    </section>
-    <section>
-        <div class="container catalog"></div>
-    </section>
-    <footer></footer>
-    <script>
-        'use strict';
+        <div class="row header__bottom">
+            <ul id="navigation">
+                <li><a href="#">Главная</a></li>
+                <li><a href="#">Портфолио</a></li>
+                <li><a href="#">Услуги</a></li>
+                <li><a href="#">Контакты</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+<section>
+    <div class="container slider">
+        <div class="row">
+            <h1>КРЕАТИВНАЯ СТУДИЯ ДИЗАЙНА</h1>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container catalog"></div>
+</section>
+<footer></footer>
+<script>
+    'use strict';
 
-        const navbar = {
-            header: document.querySelector('header'),
-            headerTop: document.querySelector('.header__top'),
-            headerBottom: document.querySelector('.header__bottom'),
+    const navbar = {
+        header: document.querySelector('header'),
+        headerTop: document.querySelector('.header__top'),
+        headerBottom: document.querySelector('.header__bottom'),
 
-            init(){
-                window.addEventListener('scroll', () => this.hideHeaderTop());
-            },
+        init(){
+            window.addEventListener('scroll', () => this.hideHeaderTop());
+        },
 
-            hideHeaderTop() {
+        hideHeaderTop() {
 
-                if(window.pageYOffset > 0) {
-                    this.headerTop.classList.add('opacity');
-                    this.headerTop.style.transform = 'translateY(-100%)';
-                    this.headerTop.style.transition = 'transform 1sgit ';
-                    this.headerBottom.style.transform = 'translateY(-30%)';
-                    this.headerBottom.style.transition = 'transform 1s';
-                    this.header.classList.add('shadow');
-                } else {
-                    this.headerTop.classList.remove('opacity');
-                    this.headerTop.style.transform = 'translateY(0)';
-                    this.headerTop.style.transition = 'transform 1s';
-                    this.headerBottom.style.transform = 'translateY(0)';
-                    this.headerBottom.style.transition = 'transform 1s';
-                    this.header.classList.remove('shadow');
-                }
-            },
-        };
+            if(window.pageYOffset > 0) {
+                this.headerTop.classList.add('opacity');
+                this.headerTop.style.transform = 'translateY(-100%)';
+                this.headerTop.style.transition = 'transform 1sgit ';
+                this.headerBottom.style.transform = 'translateY(-30%)';
+                this.headerBottom.style.transition = 'transform 1s';
+                this.header.classList.add('shadow');
+            } else {
+                this.headerTop.classList.remove('opacity');
+                this.headerTop.style.transform = 'translateY(0)';
+                this.headerTop.style.transition = 'transform 1s';
+                this.headerBottom.style.transform = 'translateY(0)';
+                this.headerBottom.style.transition = 'transform 1s';
+                this.header.classList.remove('shadow');
+            }
+        },
+    };
 
-        window.addEventListener('load', () => navbar.init());
-    </script>
+    window.addEventListener('load', () => navbar.init());
+</script>
 </body>
 </html>
