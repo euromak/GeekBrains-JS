@@ -1,3 +1,4 @@
+'use strict';
 /*const products = [
   {id: 1, title: 'Куртка', price: 10000, image: 'https://www.topmangal.com/wp-content/uploads/man/product_1.jpg',},
   {id: 2, title: 'Пальто', price: 10000, image: 'https://www.topmangal.com/wp-content/uploads/man/product_2.jpg',},
