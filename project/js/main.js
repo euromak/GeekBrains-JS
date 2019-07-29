@@ -1,4 +1,5 @@
-const products = [
+'use strict';
+/*const products = [
   {id: 1, title: 'Куртка', price: 10000, image: 'https://www.topmangal.com/wp-content/uploads/man/product_1.jpg',},
   {id: 2, title: 'Пальто', price: 10000, image: 'https://www.topmangal.com/wp-content/uploads/man/product_2.jpg',},
   {id: 3, title: 'Куртка', price: 7500, image: 'https://www.topmangal.com/wp-content/uploads/man/product_3.jpg',},
@@ -24,3 +25,62 @@ const renderProducts = list =>
 ;
 
 renderProducts(products);
+*/
+
+
+class ProductList {
+  constructor(container = '.products') {
+    this.container = container;
+    this.goods = [];
+    this.allProducts = [];
+    this._fetchProducts();
+    this.render();
+  }
+
+  _fetchProducts() {
+    this.goods = [
+        {id: 1, title: 'Куртка', price: 10000, image: 'https://www.topmangal.com/wp-content/uploads/man/product_1.jpg',},
+        {id: 2, title: 'Пальто', price: 10000, image: 'https://www.topmangal.com/wp-content/uploads/man/product_2.jpg',},
+        {id: 3, title: 'Куртка', price: 7500, image: 'https://www.topmangal.com/wp-content/uploads/man/product_3.jpg',},
+        {id: 4, title: 'Поло', price: 4500, image: 'https://www.topmangal.com/wp-content/uploads/man/product_4.jpg',},
+        {id: 5, title: 'Худи', price: 6000, image: 'https://www.topmangal.com/wp-content/uploads/man/product_5.jpg',},
+        {id: 6, title: 'Куртка', price: 7000, image: 'https://www.topmangal.com/wp-content/uploads/man/product_6.jpg',},
+        {id: 7, title: 'Пиджак', price: 5500, image: 'https://www.topmangal.com/wp-content/uploads/man/product_7.jpg',},
+        {id: 8, title: 'Куртка', price: 9000, image: 'https://www.topmangal.com/wp-content/uploads/man/product_8.jpg',},
+    ];
+  }
+
+  render() {
+    const block = document.querySelector(this.container);
+
+    for(let product of this.goods) {
+      const productObject = new ProductItem(product);
+      this.allProducts.push(productObject);
+      block.insertAdjacentHTML('beforeend', productObject.render());
+    }
+  }
+}
+
+class ProductItem {
+  constructor(product) {
+    this.title = product.title;
+    this.price = product.price;
+    this.id = product.id;
+    this.image = product.image;
+  }
+
+  render() {
+    return `<div class="product-item" data-id="${this.id}">
+          <img src="${this.image}" alt="image product">
+          <h3>${this.title}</h3>
+          <p>${this.price} руб.</p>
+          <button class="by-btn">Добавить</button>
+        </div>`;
+  }
+}
+
+class Cart {}
+
+class CartItem {}
+
+const list = new ProductList();
