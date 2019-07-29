@@ -35,6 +35,7 @@ class ProductList {
     this.allProducts = [];
     this._fetchProducts();
     this.render();
+    this.countTotalPrice(this.goods);
   }
 
   _fetchProducts() {
@@ -58,6 +59,26 @@ class ProductList {
       this.allProducts.push(productObject);
       block.insertAdjacentHTML('beforeend', productObject.render());
     }
+  }
+
+  countTotalPrice(products) {
+    let totalPrice = 0;
+
+    products.forEach((item) => totalPrice += item.price);
+    console.log(`В каталоге ${products.length} товаров на сумму ${totalPrice} руб.`);
+
+    /*const arrFilter = products.map((item) => {
+      if (item.price >= 9000) return item;
+    });
+
+    arrFilter.forEach((item, i) => {
+      if (item === undefined) {
+        arrFilter.splice(i);
+      }
+    });
+
+    console.log(arrFilter);
+    */
   }
 }
 
