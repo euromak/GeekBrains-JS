@@ -137,16 +137,13 @@ class Cart {
   }
 }
 
-class CartItem {
+class CartItem extends ProductItem{
   constructor(product) {
-    this.title = product.title;
-    this.price = product.price;
-    this.id = product.id;
-    this.img = product.img;
+    super(product);
   }
 
   render() {
-    return `<div class="basket-product" id="${this.id}">
+    return `<div class="basket-product" data-id="${this.id}">
         <img src="${this.img}" alt="${this.title}">
         <h3>${this.title}</h3>
         <p>${this.price}</p>
