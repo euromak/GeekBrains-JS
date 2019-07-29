@@ -61,6 +61,7 @@ class ProductList {
   }
 }
 
+// создаем класс для каждого продукта
 class ProductItem {
   constructor(product) {
     this.title = product.title;
@@ -68,7 +69,7 @@ class ProductItem {
     this.id = product.id;
     this.image = product.image;
   }
-
+  // метод render для генерации разметки товара
   render() {
     return `<div class="product-item" data-id="${this.id}">
           <img src="${this.image}" alt="image product">
@@ -79,8 +80,58 @@ class ProductItem {
   }
 }
 
-class Cart {}
+class Cart {
 
-class CartItem {}
+  constructor(container = '#basket', catalog = '.products') {
+    this.container = container;
+    this.catalog = catalog;
+    this.basket = [];
+    this.totalPrice = 0;
+    this.quantity = 0;
+    this.init();
+    this.addProductToCart();
+    this.deleteProductFromCart();
+    this.render();
+    this.countTotalPrice();
+  }
+
+  init() {
+
+  }
+
+  addProductToCart() {
+
+  }
+
+  deleteProductFromCart() {
+
+  }
+
+  render() {
+
+  }
+
+  countTotalPrice() {
+
+  }
+}
+
+class CartItem {
+  constructor(product) {
+    this.title = product.title;
+    this.price = product.price;
+    this.id = product.id;
+    this.img = product.img;
+  }
+
+  render() {
+    return `<div class="basket-product" id="${this.id}">
+        <img src="${this.img}" alt="${this.title}">
+        <h3>${this.title}</h3>
+        <p>${this.price}</p>
+        </div>`;
+  }
+}
 
 const list = new ProductList();
+const cart = new Cart();
