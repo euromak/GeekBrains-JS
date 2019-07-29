@@ -30,14 +30,41 @@ class Hamburger {
         // индекс гамбургера
         this.hamburgerIndex = [];
 
+        // массив начинок
+        this.stuffingIndex = [];
+
+        // массив добавок
+        this.toppingIndex = [];
+
         // инициализация БД гамбургеров по размеру, начинке и добавкам
         this.fetchSize();
         this.fetchStuffing();
         this.fetchTopping();
 
+        // добавить размер бургера в массив
+        this.addHamburger(size);
+
+        // добавить начинку
+        this.addStuffing(stuffing);
+
+        // добавить/убрать добавку в индекс
         this.addTopping(stuffing);
         this.removeTopping(stuffing);
+
+        // получить список добавок
         this.getTopping();
+
+        // получить размер гамбургера
+        this.getSize();
+
+        // получить начинку
+        this.getStuffing();
+
+        // рассчитываем стоимость бургера
+        this.calculatePrice();
+
+        // рассчитываем кол-во калорий бургера
+        this.calculateCalories();
 
     }
 
@@ -64,46 +91,82 @@ class Hamburger {
         ]
     }
 
+    // Добавить бургер в массив
+    addHamburger(size) {
+        this.sizeData.forEach(item => {
+            if (item.size === size) {
+                this.hamburgerIndex.push(item);
+            }
+        });
+    }
+
+    // Добавить начинку
+    addStuffing(stuffing) {
+        this.stuffingData.forEach(item => {
+            if (item.stuffing === stuffing) {
+                this.stuffingIndex.push(item);
+            }
+        });
+    }
+
     // Добавить добавку
     addTopping(topping) {
-        this.toppingData.forEach((item) => {
+        this.toppingData.forEach(item => {
             if (topping === item.topping) {
-                this.hamburgerIndex.push(item);
-                //console.log(this.hamburgerIndex);
+                this.toppingIndex.push(item);
+                //console.log(this.toppingIndex);
             }
         });
     }
 
     // Убрать добавку
     removeTopping(topping) {
-        this.hamburgerIndex.forEach((item, i) => {
+        this.toppingIndex.forEach((item, i) => {
             if (topping === item.topping) {
-                this.hamburgerIndex.splice(i, 1);
-                //console.log(this.hamburgerIndex);
+                this.toppingIndex.splice(i, 1);
+                //console.log(this.toppingIndex);
             }
         });
     }
 
     // Получить список добавок
     getTopping() {
-        console.log(this.hamburgerIndex);
+        for (let i = 0; i < this.toppingIndex.length; i++) {
+            console.log(this.toppingIndex[i]);
+        }
     }
 
     // Узнать размер гамбургера
-    getSize() {}
+    getSize() {
+        console.log(`Размер вашего бургера: ${this.size}`);
+    }
 
     // Узнать начинку гамбургера
-    getStuffing() {}
+    getStuffing() {
+        console.log(`Начинка вашего бургера: ${this.stuffing}`);
+    }
 
     // Узнать цену
-    calculatePrice() {}
+    calculatePrice() {
+        const totalIndex = this.hamburgerIndex.concat(this.stuffingIndex, this.toppingIndex);
+
+        totalIndex.forEach(item => this.totalPrice += item.price);
+
+        console.log(`Стоимость вашего бургера ${this.totalPrice} руб.`);
+    }
 
     // Узнать калорийность
-    calculateCalories() {}
+    calculateCalories() {
+        const totalIndex = this.hamburgerIndex.concat(this.stuffingIndex, this.toppingIndex);
+
+        totalIndex.forEach(item => this.totalCalories += item.calories);
+
+        console.log(`Калорийность бургера составляет ${this.totalCalories} Ккал.`);
+    }
 
 }
 
-const hamburger = new Hamburger('big', 'cheese');
+const hamburger = new Hamburger('small', 'salat');
 
-console.log(hamburger);
+//console.log(hamburger);
 
