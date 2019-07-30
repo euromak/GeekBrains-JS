@@ -166,7 +166,81 @@ class Hamburger {
 
 }
 
-const hamburger = new Hamburger('small', 'salat');
+const buildBurger = {
+    getSize: '',
+    getStuffing: '',
+    getTopping: '',
+    container: document.querySelector('.burger'),
+    messageContainer: document.querySelector('.messageBox'),
+    littleBurger: document.querySelector('#littleBurger'),
+    bigBurger: document.querySelector('#bigBurger'),
+    blockMessage: document.querySelector('.message'),
+    blockStuffing: document.querySelector('.stuffing'),
+    blockTopping: document.querySelector('.topping'),
+
+    init() {
+        this.container.addEventListener('click', (event) => {this.askSize(event)});
+        this.blockStuffing.addEventListener('click', (event) => {this.askStuffing(event)});
+        this.blockTopping.addEventListener('click', (event) => {this.askTopping(event)});
+    },
+
+    askSize(event) {
+        if (event.target.id === 'breadTop1') {
+            this.getSize = 'small';
+            this.bigBurger.style.display = 'none';
+            this.blockMessage.textContent = 'ВЫБЕРИТЕ НАЧИНКУ';
+            this.blockStuffing.style.display = 'flex';
+        } else if(event.target.id === 'breadTop') {
+            this.getSize = 'big';
+            this.littleBurger.style.display = 'none';
+            this.blockMessage.textContent = 'ВЫБЕРИТЕ НАЧИНКУ';
+            this.blockStuffing.style.display = 'flex';
+        }
+    },
+
+    askStuffing(event) {
+        if (event.target.id === 'cheeseStuff') {
+            this.getStuffing = 'cheese';
+            this.blockStuffing.style.display = 'none';
+            this.blockMessage.textContent = 'ВЫБЕРИТЕ ДОБАВКУ';
+            this.blockTopping.style.display = 'flex';
+        } else if(event.target.id === 'salatStuff') {
+            this.getStuffing = 'salat';
+            this.blockStuffing.style.display = 'none';
+            this.blockMessage.textContent = 'ВЫБЕРИТЕ ДОБАВКУ';
+            this.blockTopping.style.display = 'flex';
+        } else {
+            this.getStuffing = 'potato';
+            this.blockStuffing.style.display = 'none';
+            this.blockMessage.textContent = 'ВЫБЕРИТЕ ДОБАВКУ';
+            this.blockTopping.style.display = 'flex';
+        }
+    },
+
+    askTopping(event) {
+        if (event.target.id === 'condiment') {
+            this.getTopping = 'condiment';
+            this.blockMessage.textContent = '';
+            this.blockTopping.style.display = 'none';
+            this.out(this.getSize, this.getStuffing);
+        } else if(event.target.id === 'mayonnaise') {
+            this.getTopping = 'mayonnaise';
+            this.blockMessage.textContent = '';
+            this.blockTopping.style.display = 'none';
+        }
+    },
+
+    out(size) {
+        return size;
+    }
+};
+
+const hamburger = new Hamburger(buildBurger.out(size), 'cheese');
+
+window.addEventListener('load', () => buildBurger.init());
+
+
+
 
 //console.log(hamburger);
 

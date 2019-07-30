@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hamburger</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: helvetica;
+        }
+        .burger {
+            display: flex;
+            display-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .block {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            cursor: pointer;
+        }
+
+        .block:hover {
+            box-shadow: inset 0 0 14px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        .block img {
+            position: absolute;
+        }
+
+        /*большой бургер*/
+
+        #breadTop {
+            z-index: 10;
+        }
+
+        #meatTop
+        {
+            z-index: 9;
+        }
+
+        #salat {
+            z-index: 8;
+        }
+
+        #cheese {
+            z-index: 7;
+        }
+
+        #meatBottom {
+            z-index: 6;
+        }
+
+        #breadBottom {
+            z-index: 1;
+        }
+
+        /*маленький бургер*/
+
+        #breadTop1 {
+            z-index: 10;
+            top: 60px;
+        }
+
+        #meatTop1
+        {
+            z-index: 9;
+        }
+
+        #salat1 {
+            z-index: 8;
+            top: 40px;
+        }
+
+        #cheese1 {
+            z-index: 7;
+        }
+
+        #meatBottom1 {
+            z-index: 6;
+        }
+
+        #breadBottom1 {
+            z-index: 1;
+        }
+
+        .breadTopLittle1 {
+            top: 60px;
+        }
+
+        .message {
+            width: 100%;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 30px;
+        }
+
+        .stuffing {
+            display: none;
+            justify-content: space-around;
+            align-items: center;
+            height: 100px;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .stuffing div:hover {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+        }
+
+        .topping {
+            display: none;
+            justify-content: space-around;
+            align-items: center;
+            height: 100px;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .topping div:hover {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+        }
+
+    </style>
+</head>
+<body>
+
+<section class="burger">
+    <div class="block" id="littleBurger">
+        <img src="img/bread_top.png" alt="" id="breadTop1" class="breadTopLittle">
+        <img src="img/salat.png" alt="" id="salat1">
+        <img src="img/meat_bottom.png" alt="" id="meatBottom1">
+        <img src="img/bread_bottom.png" alt="" id="breadBottom1">
+    </div>
+    <div class="block" id="bigBurger">
+        <img src="img/bread_top.png" alt="" id="breadTop">
+        <img src="img/meat_top.png" alt="" id="meatTop">
+        <img src="img/salat.png" alt="" id="salat">
+        <img src="img/cheese.png" alt="" id="cheese">
+        <img src="img/meat_bottom.png" alt="" id="meatBottom">
+        <img src="img/bread_bottom.png" alt="" id="breadBottom">
+    </div>
+</section>
+<section class="messageBox">
+    <div class="message">ВЫБЕРИТЕ БУРГЕР</div>
+    <div class="stuffing">
+        <div id="cheeseStuff" data-stuff="cheese">СЫР</div>
+        <div id="salatStuff" data-stuff="salat">ОВОЩИ</div>
+        <div id="potato" data-stuff="potato">КАРТОШКА</div>
+    </div>
+    <div class="topping">
+        <div id="condiment" data-stuff="condiment">ПРИПРАВА</div>
+        <div id="mayonnaise" data-stuff="mayonnaise">МАЙОНЕЗ</div>
+    </div>
+</section>
+
+
+<script src="js/hamburger.js"></script>
+</body>
+</html>
