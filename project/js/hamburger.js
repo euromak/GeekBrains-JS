@@ -182,6 +182,8 @@ const buildBurger = {
         this.container.addEventListener('click', (event) => {this.askSize(event)});
         this.blockStuffing.addEventListener('click', (event) => {this.askStuffing(event)});
         this.blockTopping.addEventListener('click', (event) => {this.askTopping(event)});
+
+        this.getBurger();
     },
 
     askSize(event) {
@@ -190,7 +192,7 @@ const buildBurger = {
             this.bigBurger.style.display = 'none';
             this.blockMessage.textContent = 'ВЫБЕРИТЕ НАЧИНКУ';
             this.blockStuffing.style.display = 'flex';
-        } else if(event.target.id === 'breadTop') {
+        } else if (event.target.id === 'breadTop') {
             this.getSize = 'big';
             this.littleBurger.style.display = 'none';
             this.blockMessage.textContent = 'ВЫБЕРИТЕ НАЧИНКУ';
@@ -204,12 +206,12 @@ const buildBurger = {
             this.blockStuffing.style.display = 'none';
             this.blockMessage.textContent = 'ВЫБЕРИТЕ ДОБАВКУ';
             this.blockTopping.style.display = 'flex';
-        } else if(event.target.id === 'salatStuff') {
+        } else if (event.target.id === 'salatStuff') {
             this.getStuffing = 'salat';
             this.blockStuffing.style.display = 'none';
             this.blockMessage.textContent = 'ВЫБЕРИТЕ ДОБАВКУ';
             this.blockTopping.style.display = 'flex';
-        } else {
+        } else if (event.target.id === 'potato'){
             this.getStuffing = 'potato';
             this.blockStuffing.style.display = 'none';
             this.blockMessage.textContent = 'ВЫБЕРИТЕ ДОБАВКУ';
@@ -222,22 +224,26 @@ const buildBurger = {
             this.getTopping = 'condiment';
             this.blockMessage.textContent = '';
             this.blockTopping.style.display = 'none';
-            this.out(this.getSize, this.getStuffing);
-        } else if(event.target.id === 'mayonnaise') {
+            this.getBurger(this.getSize, this.getStuffing);
+        } else if (event.target.id === 'mayonnaise') {
             this.getTopping = 'mayonnaise';
             this.blockMessage.textContent = '';
             this.blockTopping.style.display = 'none';
+            this.getBurger(this.getSize, this.getStuffing);
         }
     },
 
-    out(size) {
-        return size;
+    getBurger() {
+        const hamburger = new Hamburger(this.getSize, this.getStuffing, this.getTopping);
+        return hamburger;
     }
 };
 
-const hamburger = new Hamburger(buildBurger.out(size), 'cheese');
-
 window.addEventListener('load', () => buildBurger.init());
+
+
+
+
 
 
 
