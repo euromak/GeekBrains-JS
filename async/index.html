@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>async</title>
+</head>
+<body>
+
+<div class="ajax-block"></div>
+<button id="ajax-get">ПОЛУЧИТЬ</button>
+<script>
+    'use strict';
+
+    let userJson = '{"name": "victor", "surname": "ermakov", "age": 30, "city": "moscow"}';
+    // преобразуем строку в объект
+    let user = JSON.parse(userJson);
+    user.salary = 50000;
+    user.phone = {main: "89153328186", add: "84954223927"};
+    /* преобразуем объект в формат JSON. если нужно добавить определенные поля необходимо сделать вторым параметром
+    * JSON.stringify(user, ['name', 'salary'). если внутри объект то необходимо и передать все его ключи, если не передадим
+    * ключи то объект будет пустой. 3 аргумент stringify - 4 - выводит в удобочитаемый формат и кол - во пробелов.
+    */
+    let userJSON2 = JSON.stringify(user, ['name', 'salary', 'phone', 'main', 'add'], 2);
+
+    /* как распарсить полученный ответ JSON по определенным услловиям. необходимо включить 2 параметром функцию
+    * с параметрами key value
+    */
+    let user2 = JSON.parse(userJSON2, (key, value) => {
+       if (true) {
+           console.log(key, value);
+           let data = new Data(value);
+           return data;
+       }
+
+    });
+
+
+    //console.log(userJSON2);
+
+</script>
+</body>
+</html>
