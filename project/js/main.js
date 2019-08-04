@@ -1,4 +1,6 @@
 'use strict';
+
+//
 const API = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses';
 
 // Переделать в ДЗ
@@ -21,9 +23,57 @@ let makeGetRequest = (url) => {
 
 makeGetRequest(`${API}/catalogData.json`).then(result => console.log(result)).catch(error => console.log(error));
 
+// описываем класс списка каталога продуктов
+class List {
+  constructor(container, url, list) {
+    this.container = container;
+    this.list = list;
+    this.url = url;
+    this.goods = [];
+    this.allProducts = [];
+    this.filter = [];
+    this._init = [];
+  }
 
-class ProductList {
-  constructor(container = '.products') {
+  // метод подтягивающий продукты из API
+  getJSON(url) {
+    return fetch(url ? url : `${API + this.url}`).then(result => result.json()).catch(error => console.log(error));
+  }
+
+  // метод вставлящий полученный объект в массив и запускающий вывод товаров на страницу
+  handleData(data) {
+    this.goods = [...data];
+    this.render();
+  }
+
+  // метод расчета общей суммы товаров
+  calcSum() {
+    return this.allProducts.reduce((accum, item) => accum += item.price, 0);
+  }
+
+  // метод выводящий товары на страницу
+  render() {
+    const block = document.querySelector(this.container);
+
+    for (let product of this.goods) {
+      console.log(this.constructor.name);
+      const productObj = new this.list[this.constructor.name](product);
+      console.log(productObj);
+      this.allProducts.push(productObj);
+      block.insertAdjacentHTML('beforeend', productObj.render());
+    }
+  }
+
+  // метод для инициализации
+  _init() {
+    return false;
+  }
+}
+
+
+class ProductList extends List {
+  constructor(container = '.products', url) {
+    super(container, url);
     this.container = container;
     this.goods = [];
     this.allProducts = [];
@@ -33,16 +83,7 @@ class ProductList {
   }
 
   _fetchProducts() {
-    this.goods = [
-        {id: 1, title: 'Куртка', price: 10000, image: 'https://www.topmangal.com/wp-content/uploads/man/product_1.jpg',},
-        {id: 2, title: 'Пальто', price: 10000, image: 'https://www.topmangal.com/wp-content/uploads/man/product_2.jpg',},
-        {id: 3, title: 'Куртка', price: 7500, image: 'https://www.topmangal.com/wp-content/uploads/man/product_3.jpg',},
-        {id: 4, title: 'Поло', price: 4500, image: 'https://www.topmangal.com/wp-content/uploads/man/product_4.jpg',},
-        {id: 5, title: 'Худи', price: 6000, image: 'https://www.topmangal.com/wp-content/uploads/man/product_5.jpg',},
-        {id: 6, title: 'Куртка', price: 7000, image: 'https://www.topmangal.com/wp-content/uploads/man/product_6.jpg',},
-        {id: 7, title: 'Пиджак', price: 5500, image: 'https://www.topmangal.com/wp-content/uploads/man/product_7.jpg',},
-        {id: 8, title: 'Куртка', price: 9000, image: 'https://www.topmangal.com/wp-content/uploads/man/product_8.jpg',},
-    ];
+
   }
 
   render() {
@@ -61,18 +102,6 @@ class ProductList {
     products.forEach((item) => totalPrice += item.price);
     console.log(`В каталоге ${products.length} товаров на сумму ${totalPrice} руб.`);
 
-    /*const arrFilter = products.map((item) => {
-      if (item.price >= 9000) return item;
-    });
-
-    arrFilter.forEach((item, i) => {
-      if (item === undefined) {
-        arrFilter.splice(i);
-      }
-    });
-
-    console.log(arrFilter);
-    */
   }
 }
 
