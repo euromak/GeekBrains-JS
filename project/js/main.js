@@ -25,18 +25,18 @@ makeGetRequest(`${API}/catalogData.json`).then(result => console.log(result)).ca
 
 // описываем класс списка каталога продуктов
 class List {
-  constructor(container, url, list) {
+  constructor(container, url, list = list2) {
     this.container = container;
     this.list = list;
     this.url = url;
     this.goods = [];
     this.allProducts = [];
     this.filter = [];
-    this._init = [];
+    this._init();
   }
 
   // метод подтягивающий продукты из API
-  getJSON(url) {
+  getJson(url) {
     return fetch(url ? url : `${API + this.url}`).then(result => result.json()).catch(error => console.log(error));
   }
 
@@ -93,115 +93,31 @@ class Item {
 }
 
 class ProductList extends List {
-  constructor(cart, container = '.products', url='/catalogData.json') {
-    super(container, url);
-    this.cart = cart;
-    this.getJson().then(data => this.handlerData(data));
-  }
-
-  _init() {
-    document.querySelector(this.container).addEventListener('click', event => {
-      if (event.target.classList.contains('buy-btn')) {
-        this.cart.addProduct(event.target);
-      }
-    })
-  }
-  _fetchProducts() {
-
-  }
-
-  render() {
-    const block = document.querySelector(this.container);
-
-    for(let product of this.goods) {
-      const productObject = new ProductItem(product);
-      this.allProducts.push(productObject);
-      block.insertAdjacentHTML('beforeend', productObject.render());
+    constructor(cart, container = '.products', url='/catalogData.json') {
+        super(container, url);
+        this.cart = cart;
+        this.getJson().then(data => this.handlerData(data));
     }
-  }
 
-  countTotalPrice(products) {
-    let totalPrice = 0;
-
-    products.forEach((item) => totalPrice += item.price);
-    console.log(`В каталоге ${products.length} товаров на сумму ${totalPrice} руб.`);
-
-  }
+    _init() {
+        document.querySelector(this.container).addEventListener('click', event => {
+            if (event.target.classList.contains('buy-btn')) {
+                this.cart.addProduct(event.target);
+            }
+        })
+    }
 }
 
-// создаем класс для каждого продукта
-class ProductItem {
-  constructor(product) {
-    this.title = product.title;
-    this.price = product.price;
-    this.id = product.id;
-    this.image = product.image;
-  }
-  // метод render для генерации разметки товара
-  render() {
-    return `<div class="product-item" data-id="${this.id}">
-          <img src="${this.image}" alt="image product">
-          <h3>${this.title}</h3>
-          <p>${this.price} руб.</p>
-          <button class="by-btn">Добавить</button>
-        </div>`;
-  }
-}
+class ProductItem extends Item {};
 
-class Cart {
+class CartItem extends Item {};
 
-  constructor(container = '#basket', catalog = '.products') {
-    this.container = container;
-    this.catalog = catalog;
-    this.basket = [];
-    this.totalPrice = 0;
-    this.quantity = 0;
-    this.init();
-    this.addProductToCart();
-    this.deleteProductFromCart();
-    this.render();
-    this.countTotalPrice();
-  }
 
-  init() {
-
-  }
-
-  addProductToCart() {
-
-  }
-
-  deleteProductFromCart() {
-
-  }
-
-  render() {
-
-  }
-
-  countTotalPrice() {
-
-  }
-}
-
-class CartItem extends ProductItem{
-  constructor(product) {
-    super(product);
-  }
-
-  render() {
-    return `<div class="basket-product" data-id="${this.id}">
-        <img src="${this.img}" alt="${this.title}">
-        <h3>${this.title}</h3>
-        <p>${this.price}</p>
-        </div>`;
-  }
-}
 
 const list2 = {
   ProductList: ProductItem,
   Cart: CartItem
-}
+};
 
-const cart = new Cart();
-const products = new ProductList(Cart);
+
+const products = new ProductList();
