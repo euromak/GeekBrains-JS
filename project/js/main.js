@@ -41,7 +41,7 @@ class List {
   }
 
   // метод вставлящий полученный объект в массив и запускающий вывод товаров на страницу
-  handleData(data) {
+  handlerData(data) {
     this.goods = [...data];
     this.render();
   }
@@ -70,18 +70,42 @@ class List {
   }
 }
 
+// описываем класс для товара
+class Item {
+  constructor(element, image = 'https://placehold.it/200x150') {
+    this.product_name = element.product_name;
+    this.price = element.price;
+    this.id_product = element.id_product;
+    this.img = image;
+  }
+  // вывод товара на страницу
+  render() {
+      return `<div class="product-item" data-id="${this.id_product}">
+          <img src="${this.img}" alt="image product">
+          <h3>${this.product_name}</h3>
+          <p>${this.price} руб.</p>
+          <button class="by-btn" 
+          data-id="${this.id_product}" 
+          data-name="${this.product_name}"
+          data-price="${this.price}">Добавить</button>
+        </div>`;
+  }
+}
 
 class ProductList extends List {
-  constructor(container = '.products', url) {
+  constructor(cart, container = '.products', url='/catalogData.json') {
     super(container, url);
-    this.container = container;
-    this.goods = [];
-    this.allProducts = [];
-    this._fetchProducts();
-    this.render();
-    this.countTotalPrice(this.goods);
+    this.cart = cart;
+    this.getJson().then(data => this.handlerData(data));
   }
 
+  _init() {
+    document.querySelector(this.container).addEventListener('click', event => {
+      if (event.target.classList.contains('buy-btn')) {
+        this.cart.addProduct(event.target);
+      }
+    })
+  }
   _fetchProducts() {
 
   }
@@ -174,5 +198,10 @@ class CartItem extends ProductItem{
   }
 }
 
-const list = new ProductList();
+const list2 = {
+  ProductList: ProductItem,
+  Cart: CartItem
+}
+
 const cart = new Cart();
+const products = new ProductList(Cart);
