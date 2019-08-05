@@ -27,7 +27,7 @@
             background-color: white;
         }
 
-        .btn-cart {
+        .cart-btn {
             height: 40px;
             margin-right: 10px;
             padding: 0 20px;
@@ -38,7 +38,7 @@
             cursor: pointer;
         }
         
-        .btn-cart:hover {
+        .cart-btn:hover {
             background-color: #fff;
             border: 1px solid #f16d7f;
             color: #f16d7f;
@@ -73,12 +73,41 @@
             color: white;
             background-color: #f16d7f;
         }
+
+        .cart-container {
+            position: absolute;
+            width: 300px;
+            top: 60px;
+            box-shadow: 0 0 4px black;
+        }
+
+        .cart-item {
+            display: flex;
+            margin: 10px;
+        }
+
+        .left-block {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .right-block {
+            display: flex;
+            text-align: right;
+            justify-content: center;
+            align-items: center;
+        }
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
 <header>
     <div id="basket"></div>
-    <button class="btn-cart" type="button">КОРЗИНА</button>
+    <button class="cart-btn" type="button">КОРЗИНА</button>
+    <div class="cart-container hidden"></div>
 </header>
 <main>
     <div class="products"></div>
