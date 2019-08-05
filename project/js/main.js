@@ -31,7 +31,6 @@ class List {
     this.url = url;
     this.goods = [];
     this.allProducts = [];
-    this.filter = [];
     this._init();
   }
 
@@ -110,8 +109,6 @@ class ProductList extends List {
 
 class ProductItem extends Item {}
 
-class CartItem extends Item {}
-
 class Cart extends List {
     constructor(container = '.cart-container', url = '/getBasket.json') {
         super(container, url);
@@ -151,7 +148,7 @@ class Cart extends List {
                 let find = this.allProducts.find(product => product.id_product === productId);
                 if(find.quantity > 1) {
                     find.quantity--;
-                    this._updateCart(find);
+                    this._upDateCart(find);
                 } else {
                     this.allProducts.splice(this.allProducts.indexOf(find), 1);
                     document.querySelector(`.cart-item[data-id="${productId}"]`).remove();
@@ -163,15 +160,52 @@ class Cart extends List {
     }
 
     // обновление
+    _upDateCart(product) {
+        let block = document.querySelector(`.cart-item[data-id="${product.id_product}"]`);
+        block.querySelector('.product-quantity').textContent = `Кол-во: ${product.quantity}`;
+        block.querySelector('.product-price').textContent = `$${product.quantity*product.price}`;
+    }
 
+    _init() {
+        document.querySelector('.cart-btn').addEventListener('click', () => {
+            document.querySelector(this.container).classList.toggle('hidden');
+        });
+        document.querySelector(this.container).addEventListener('click', event => {
+            if(event.target.classList.contains('remove-item')) {
+                this.removeProduct(event.target);
+            }
+        })
+    }
 }
 
+class CartItem extends Item {
+    constructor(element, image = 'https://placehold.it/50x100') {
+        super(element, image);
+        this.quantity = element.quantity;
+    }
 
+    render() {
+        return `<div class="cart-item" data-id="${this.id_product}">
+            <div class="product-bio">
+            <img src="${this.img}" alt="Some image">
+            <div class="product-desc">
+            <p class="product-title">${this.product_name}</p>
+            <p class="product-quantity">Quantity: ${this.quantity}</p>
+        <p class="product-single-price">$${this.price} each</p>
+        </div>
+        </div>
+        <div class="right-block">
+            <p class="product-price">$${this.quantity*this.price}</p>
+            <button class="del-btn" data-id="${this.id_product}">&times;</button>
+        </div>
+        </div>`
+    }
+}
 
 const list2 = {
   ProductList: ProductItem,
   Cart: CartItem
 };
 
-
-const products = new ProductList();
+let cart = new Cart();
+let products = new ProductList(cart);
