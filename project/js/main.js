@@ -108,9 +108,63 @@ class ProductList extends List {
     }
 }
 
-class ProductItem extends Item {};
+class ProductItem extends Item {}
 
-class CartItem extends Item {};
+class CartItem extends Item {}
+
+class Cart extends List {
+    constructor(container = '.cart-container', url = '/getBasket.json') {
+        super(container, url);
+        this.getJson().then(this.handlerData(data.contents));
+    }
+
+    // добавление товара
+    addProduct(element) {
+        this.getJson(`${API}/addToBasket.json`).then(data => {
+            if(data === 1) {
+                let productId = +element.dataset['id'];
+                let find = this.allProducts.find(product => product.id_product === productId);
+                if(find) {
+                    find.quantity++;
+                    this._updateCart(find);
+                } else {
+                    let product = {
+                        id_product: productId,
+                        price: +element.dataset['price'],
+                        product_name: element.dataset['name'],
+                        quantity: 1
+                    };
+                    this.goods = [product];
+                    this.render();
+                }
+            } else {
+                alert('Ошибка добавления');
+            }
+        })
+    }
+
+    // удаление товара
+    removeProduct(element) {
+        this.getJson(`${API}/deleteFromBasket.json`).then(data => {
+            if(data.result === 1) {
+                let productId = +element.dataset['id'];
+                let find = this.allProducts.find(product => product.id_product === productId);
+                if(find.quantity > 1) {
+                    find.quantity--;
+                    this._updateCart(find);
+                } else {
+                    this.allProducts.splice(this.allProducts.indexOf(find), 1);
+                    document.querySelector(`.cart-item[data-id="${productId}"]`).remove();
+                }
+            } else {
+                alert('Ошибка удаления');
+            }
+        })
+    }
+
+    // обновление
+
+}
 
 
 
