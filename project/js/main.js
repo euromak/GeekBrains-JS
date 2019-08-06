@@ -196,7 +196,7 @@ class CartItem extends Item {
             </div>
             <div class="right-block">
                 <p class="product-price">$${this.quantity*this.price}</p>
-                <button class="remove-item" data-id="${this.id_product}">&times;</button>
+                <i class="fa fa-times-circle remove-item" data-id="${this.id_product}" aria-hidden="true"></i>
             </div>
             </div>`
     }
