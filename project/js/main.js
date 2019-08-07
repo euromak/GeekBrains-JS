@@ -83,7 +83,7 @@ class Item {
           <img src="${this.img}" alt="image product">
           <h3>${this.product_name}</h3>
           <p>${this.price} руб.</p>
-          <button class="by-btn" 
+          <button class="buy-btn" 
           data-id="${this.id_product}" 
           data-name="${this.product_name}"
           data-price="${this.price}">Добавить</button>
@@ -118,12 +118,12 @@ class Cart extends List {
     // добавление товара
     addProduct(element) {
         this.getJson(`${API}/addToBasket.json`).then(data => {
-            if(data === 1) {
+            if(data.result === 1) {
                 let productId = +element.dataset['id'];
                 let find = this.allProducts.find(product => product.id_product === productId);
                 if(find) {
                     find.quantity++;
-                    this._updateCart(find);
+                    this._upDateCart(find);
                 } else {
                     let product = {
                         id_product: productId,
@@ -188,15 +188,15 @@ class CartItem extends Item {
         return `<div class="cart-item" data-id="${this.id_product}">
             <div class="left-block">
             <img src="${this.img}" alt="image">
-            <div class="product-desc">
+            <div class="product-info">
             <p class="product-title">${this.product_name}</p>
             <p class="product-quantity">Кол-во: ${this.quantity}</p>
-            <p class="product-single-price">$${this.price} each</p>
+            <p class="product-single-price">$${this.price}</p>
             </div>
             </div>
             <div class="right-block">
                 <p class="product-price">$${this.quantity*this.price}</p>
-                <button class="del-btn" data-id="${this.id_product}">&times;</button>
+                <i class="fa fa-times-circle remove-item" data-id="${this.id_product}" aria-hidden="true"></i>
             </div>
             </div>`
     }
