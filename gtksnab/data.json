@@ -1,18 +1,18 @@
 [
   {
-    "name": "Weishaupt",
+    "name": "weishaupt",
     "category": "burn",
     "id": "045",
     "links": ["www.wg-20.ru", "www.wg-30.ru"]
   },
   {
-    "name": "Baltur",
+    "name": "baltur",
     "category": "burn",
     "id": "074",
     "links": ["www.wg-20.ru", "www.wg-30.ru"]
   },
   {
-    "name": "Dab",
+    "name": "dab",
     "category": "pump",
     "id": "425",
     "links": ["www.wg-20.ru", "www.wg-30.ru"]

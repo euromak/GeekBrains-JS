@@ -25,10 +25,13 @@ class Table {
         this.init();
     }
 
-    fetch(url) {
-        url.forEach((item) => {
-            if(item.brand === this.name) {this.items.push(item)};
-        })
+    fetchJson(url) {
+        return fetch(url).then(result => result.json()).catch(error => console.log(error));
+    }
+
+    handlerData(data) {
+        let arr = data.filter(brand => brand.name === this.name);
+        this.items = [...arr];
     }
 
     render() {
@@ -36,7 +39,7 @@ class Table {
     }
 
     init() {
-        this.fetch(this.url);
+        this.fetchJson(this.url).then(data => this.handlerData(data));
     }
 }
 
@@ -55,9 +58,9 @@ class TableItem {
 
 
 }
-let weishaupt = new Table('weishaupt', data);
+let weishaupt = new Table('weishaupt', 'data.json');
 
 
 
 
-fetch('data.json').then(response => console.log(response));
+
