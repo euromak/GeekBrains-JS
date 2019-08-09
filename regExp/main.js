@@ -29,7 +29,8 @@ class TransformText {
 
 
 let regExp1 = new TransformText('#text', "'", 'g', '"');
-console.log(regExp1.transform());
+//let regExp2 = new TransformText('#text', "\b'\b", 'gi', "'");
+
 
 
 
