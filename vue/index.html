@@ -125,21 +125,27 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
-<header>
-    <div id="basket"></div>
-    <button class="cart-btn" type="button">КОРЗИНА</button>
-    <div class="cart-container hidden"></div>
-</header>
-<main>
-    <div class="products"></div>
-</main>
-<section>
-    <div id="message">
-
-    </div>
-</section>
-
+<div id="app">
+    <header>
+        <div id="basket"></div>
+        <button class="cart-btn" type="button">КОРЗИНА</button>
+        <div class="cart-container hidden"></div>
+    </header>
+    <main>
+        <div class="products">
+            <div v-for="product in catalogProducts" class="product-item">
+                <img :src="image" alt="image">
+                <h3>{{product.product_name}}</h3>
+                <p>{{product.price}} руб</p>
+                <button class="buy-btn"
+                        :data-id="product.id_product"
+                        :data-name="product.product_name"
+                        :data-price="product.price">Добавить</button>
+            </div>
+        </div>
+    </main>
+</div>
 <script src="https://use.fontawesome.com/7634060d91.js"></script>
-<script src="./js/main.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>
