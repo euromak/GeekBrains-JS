@@ -10,6 +10,8 @@ const app = new Vue({
         filterProducts: [],
         images: ['https://placehold.it/200x150', 'https://placehold.it/50x100'],
         message: 'Hello Viktor',
+        totalPrice: 0,
+        totalQuantity: 0,
 
     },
 
@@ -44,6 +46,11 @@ const app = new Vue({
                     }
                 }
             });
+        },
+
+        cart() {
+            if(document.querySelector('.cart-container').children.length === 0) alert('В корзине не товаров');
+            return document.querySelector('.cart-container').classList.toggle('hidden');
         }
 
     },

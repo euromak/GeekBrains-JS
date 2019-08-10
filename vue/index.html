@@ -128,8 +128,23 @@
 <div id="app">
     <header>
         <div id="basket"></div>
-        <button class="cart-btn" type="button">КОРЗИНА</button>
-        <div class="cart-container"></div>
+        <button class="cart-btn" type="button" @click="cart">КОРЗИНА</button>
+            <div class="cart-container" >
+            <div class="cart-item" v-for="product in basketProducts">
+                <div class="left-block">
+                    <img :src="images[1]" alt="imageSmall">
+                    <div class="product-info">
+                        <p class="product-title">{{product.product_name}}</p>
+                        <p class="product-quantity">Кол-во: {{product.quantity}}</p>
+                        <p class="product-single-price">{{product.price}}</p>
+                    </div>
+                </div>
+                <div class="right-block">
+                    <p class="product-price">{{product.price}}</p>
+                    <i class="fa fa-times-circle remove-item" data-id="${this.id_product}" aria-hidden="true"></i>
+                </div>
+            </div>
+        </div>
     </header>
     <main>
         <div class="products">
