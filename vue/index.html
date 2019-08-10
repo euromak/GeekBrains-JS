@@ -129,18 +129,15 @@
     <header>
         <div id="basket"></div>
         <button class="cart-btn" type="button">КОРЗИНА</button>
-        <div class="cart-container hidden"></div>
+        <div class="cart-container"></div>
     </header>
     <main>
         <div class="products">
             <div v-for="product in catalogProducts" class="product-item">
-                <img :src="image" alt="image">
+                <img :src="images[0]" alt="image">
                 <h3>{{product.product_name}}</h3>
                 <p>{{product.price}} руб</p>
-                <button class="buy-btn"
-                        :data-id="product.id_product"
-                        :data-name="product.product_name"
-                        :data-price="product.price">Добавить</button>
+                <button class="buy-btn" :data-id="product.id_product" @click="addToBasket">Добавить</button>
             </div>
         </div>
     </main>
