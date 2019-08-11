@@ -12,6 +12,7 @@ const app = new Vue({
         message: 'Hello Viktor',
         totalPrice: 0,
         totalQuantity: 0,
+        currentIdx: 0,
 
     },
 
@@ -36,20 +37,35 @@ const app = new Vue({
             response.then(data => {
                 if(data.result === 1) {
                     let product = this.catalogProducts.find(product => product.id_product === productId);
+                    //product.quantity++;
+                    console.log(product);
                     if(this.basketProducts.includes(product)) {
                         product.quantity++;
+                        this.totalPrice += product.price;
+                        this.totalQuantity++;
+                        console.log(this.totalQuantity);
+                        console.log(this.totalPrice);
                         console.log(this.basketProducts);
                     } else {
                         product.quantity = 1;
                         this.basketProducts.push(product);
+                        this.totalPrice += product.price;
+                        this.totalQuantity++;
+                        console.log(this.totalQuantity);
+                        console.log(this.totalPrice);
                         console.log(this.basketProducts);
                     }
                 }
             });
         },
 
+        getTotalPrice() {
+        },
+
         cart() {
-            if(document.querySelector('.cart-container').children.length === 0) alert('В корзине не товаров');
+            if(document.querySelector('.cart-container').children.length === 0) {
+                alert('В корзине не товаров');
+            }
             return document.querySelector('.cart-container').classList.toggle('hidden');
         }
 

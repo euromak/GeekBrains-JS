@@ -84,22 +84,30 @@
 
         .cart-item {
             display: flex;
+            width: 230px;
+            flex-wrap: wrap;
             margin: 10px;
         }
 
         .left-block {
             display: flex;
+            width: 70%;
             justify-content: center;
             align-items: center;
         }
 
         .right-block {
             display: flex;
+            width: 30%;
             flex-direction: column;
             text-align: right;
             justify-content: center;
             align-items: center;
 
+        }
+
+        .bottom-block {
+            margin: 10px;
         }
 
         .product-info {
@@ -129,7 +137,7 @@
     <header>
         <div id="basket"></div>
         <button class="cart-btn" type="button" @click="cart">КОРЗИНА</button>
-            <div class="cart-container" >
+            <div class="cart-container hidden" >
             <div class="cart-item" v-for="product in basketProducts">
                 <div class="left-block">
                     <img :src="images[1]" alt="imageSmall">
@@ -140,10 +148,16 @@
                     </div>
                 </div>
                 <div class="right-block">
-                    <p class="product-price">{{product.price}}</p>
+                    <p class="product-price">{{product.price * product.quantity}}</p>
                     <i class="fa fa-times-circle remove-item" data-id="${this.id_product}" aria-hidden="true"></i>
                 </div>
+
             </div>
+                <div class="bottom-block">
+                    <p>ОБЩЕЕ КОЛ-ВО: {{totalQuantity}} шт.</p>
+                    <p>ИТОГО: {{totalPrice}} руб.</p>
+                </div>
+
         </div>
     </header>
     <main>
@@ -156,6 +170,7 @@
             </div>
         </div>
     </main>
+
 </div>
 <script src="https://use.fontawesome.com/7634060d91.js"></script>
 <script src="js/main.js"></script>
