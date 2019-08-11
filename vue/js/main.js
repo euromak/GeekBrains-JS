@@ -14,6 +14,7 @@ const app = new Vue({
         totalQuantity: 0,
         currentIdx: 0,
         searchQuery: '',
+        iconBtn: '<i class="fas fa-search"></i>',
 
     },
 

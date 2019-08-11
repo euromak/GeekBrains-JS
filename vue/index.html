@@ -41,7 +41,7 @@
         
         .cart-btn:hover {
             background-color: #fff;
-            border: 1px solid #f16d7f;
+            outline: 1px solid #f16d7f;
             color: #f16d7f;
         }
 
@@ -108,6 +108,7 @@
 
         .bottom-block {
             margin: 10px;
+            padding-left: 10px;
         }
 
         .product-info {
@@ -130,10 +131,29 @@
             display: none;
         }
 
-        #queries-value {
-
+        #search {
+            display: flex;
+            margin-right: 10px;
         }
 
+        #queries-value {
+            width: 200px;
+            padding: 2px 6px;
+            border: 1px solid #e6e6e6;
+        }
+
+        #search-btn {
+            width: 30px;
+            background: none;
+            padding: 2px;
+            cursor: pointer;
+            border: none;
+            border: 1px solid #e6e6e6;
+        }
+        
+        .fa-search {
+            color: #f16d7f;
+        }
 
     </style>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -141,15 +161,15 @@
 <body>
 <div id="app">
     <header>
-        <div id="basket"></div>
-        <form name="search'">
+        <form name="search" id="search">
             <input type="text" id="queries-value" v-model="searchQuery">
-            <input type="submit" value="Поиск" id="search-btn" @click="searchProduct">
+            <button type="submit" value="Поиск" id="search-btn" @click="searchProduct">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
         </form>
         <button class="cart-btn" type="button" @click="cart">КОРЗИНА</button>
             <div class="cart-container hidden" >
             <div class="cart-item" v-for="product in basketProducts">
-
                 <div class="left-block">
                     <img :src="images[1]" alt="imageSmall">
                     <div class="product-info">
@@ -166,8 +186,8 @@
             </div>
                 <div v-if="basketProducts.length === 0">{{message}}</div>
                 <div class="bottom-block">
-                    <p>ОБЩЕЕ КОЛ-ВО: {{totalQuantity}} шт.</p>
-                    <p>ИТОГО: {{totalPrice}} руб.</p>
+                    <p><b>ОБЩЕЕ КОЛ-ВО:</b> {{totalQuantity}} шт.</p>
+                    <p><b>ИТОГО:</b> {{totalPrice}} руб.</p>
                 </div>
 
         </div>
@@ -182,7 +202,6 @@
             </div>
         </div>
     </main>
-
 </div>
 <script src="https://use.fontawesome.com/7634060d91.js"></script>
 <script src="js/main.js"></script>
