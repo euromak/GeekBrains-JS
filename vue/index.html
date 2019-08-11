@@ -139,6 +139,7 @@
         <button class="cart-btn" type="button" @click="cart">КОРЗИНА</button>
             <div class="cart-container hidden" >
             <div class="cart-item" v-for="product in basketProducts">
+
                 <div class="left-block">
                     <img :src="images[1]" alt="imageSmall">
                     <div class="product-info">
@@ -149,10 +150,11 @@
                 </div>
                 <div class="right-block">
                     <p class="product-price">{{product.price * product.quantity}}</p>
-                    <i class="fa fa-times-circle remove-item" data-id="${this.id_product}" aria-hidden="true"></i>
+                    <i class="fa fa-times-circle remove-item" :data-id="product.id_product" @click="removeFromBasket" aria-hidden="true" ></i>
                 </div>
 
             </div>
+                <div v-if="basketProducts.length === 0">{{message}}</div>
                 <div class="bottom-block">
                     <p>ОБЩЕЕ КОЛ-ВО: {{totalQuantity}} шт.</p>
                     <p>ИТОГО: {{totalPrice}} руб.</p>

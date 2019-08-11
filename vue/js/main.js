@@ -9,7 +9,7 @@ const app = new Vue({
         basketProducts: [],
         filterProducts: [],
         images: ['https://placehold.it/200x150', 'https://placehold.it/50x100'],
-        message: 'Hello Viktor',
+        message: 'В корзине нет товаров',
         totalPrice: 0,
         totalQuantity: 0,
         currentIdx: 0,
@@ -25,7 +25,6 @@ const app = new Vue({
             response.then(result => {
                 for(let key in result) {
                     this.catalogProducts.push(result[key]);
-                    //console.log(this.catalogProducts);
                 }
             })
         },
@@ -37,24 +36,35 @@ const app = new Vue({
             response.then(data => {
                 if(data.result === 1) {
                     let product = this.catalogProducts.find(product => product.id_product === productId);
-                    //product.quantity++;
-                    console.log(product);
+
                     if(this.basketProducts.includes(product)) {
                         product.quantity++;
-                        this.totalPrice += product.price;
-                        this.totalQuantity++;
-                        console.log(this.totalQuantity);
-                        console.log(this.totalPrice);
-                        console.log(this.basketProducts);
                     } else {
                         product.quantity = 1;
                         this.basketProducts.push(product);
-                        this.totalPrice += product.price;
-                        this.totalQuantity++;
-                        console.log(this.totalQuantity);
-                        console.log(this.totalPrice);
-                        console.log(this.basketProducts);
                     }
+
+                    this.totalQuantity++;
+                    this.totalPrice += product.price;
+                }
+            });
+        },
+
+        removeFromBasket() {
+            let productId = +event.target.dataset['id'];
+
+            let response = fetch(`${this.api}/deleteFromBasket.json`).then(response => response.json());
+            response.then(data => {
+                if(data.result === 1) {
+                    let product = this.basketProducts.find(product => product.id_product === productId);
+                    if(product.quantity === 1) {
+                        this.basketProducts.splice(this.basketProducts.indexOf(product), 1);
+                    } else {
+                        product.quantity--;
+                        console.log(product);
+                    }
+                    this.totalQuantity--;
+                    this.totalPrice -= product.price;
                 }
             });
         },
