@@ -13,6 +13,7 @@ const app = new Vue({
         totalPrice: 0,
         totalQuantity: 0,
         currentIdx: 0,
+        searchQuery: '',
 
     },
 
@@ -25,6 +26,7 @@ const app = new Vue({
             response.then(result => {
                 for(let key in result) {
                     this.catalogProducts.push(result[key]);
+                    this.filterProducts.push(result[key]);
                 }
             })
         },
@@ -69,8 +71,21 @@ const app = new Vue({
             });
         },
 
-        getTotalPrice() {
+        searchProduct() {
+            event.preventDefault();
+            let regexp = new RegExp(this.searchQuery, 'ig');
+            this.filterProducts = this.catalogProducts.filter(item => regexp.test(item.product_name));
+            console.log(this.filterProducts);
+
+            this.catalogProducts.map(product => {
+                if(this.searchQuery === product.product_name){
+                    alert(product.id_product);
+                }
+            });
+            console.log(this.searchQuery);
+            //console.log();
         },
+
 
         cart() {
             if(document.querySelector('.cart-container').children.length === 0) {
