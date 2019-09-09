@@ -72,20 +72,20 @@ const app = new Vue({
             });
         },
 
-        searchProduct() {
-            event.preventDefault();
-            let regexp = new RegExp(this.searchQuery, 'ig');
-            this.filterProducts = this.catalogProducts.filter(item => regexp.test(item.product_name));
-            console.log(this.filterProducts);
-
-            this.catalogProducts.map(product => {
-                if(this.searchQuery === product.product_name){
-                    alert(product.id_product);
-                }
-            });
-            console.log(this.searchQuery);
-            //console.log();
-        },
+        // searchProduct() {
+        //     event.preventDefault();
+        //     let regexp = new RegExp(this.searchQuery, 'ig');
+        //     this.filterProducts = this.catalogProducts.filter(item => regexp.test(item.product_name));
+        //     console.log(this.filterProducts);
+        //
+        //     this.catalogProducts.map(product => {
+        //         if(this.searchQuery === product.product_name){
+        //             alert(product.id_product);
+        //         }
+        //     });
+        //     console.log(this.searchQuery);
+        //     //console.log();
+        // },
 
 
         cart() {
