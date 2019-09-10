@@ -171,6 +171,7 @@
                 <!--<i class="fa fa-search" aria-hidden="true"></i>-->
             <!--</button>-->
         <!--</form>-->
+        <search :filter="filterProducts" :catalog="catalogProducts"></search>
         <button class="cart-btn" type="button" @click="cart">КОРЗИНА</button>
             <div class="cart-container hidden" >
             <div class="cart-item" v-for="product in basketProducts">
@@ -206,7 +207,6 @@
             </div>
         </div>
     </main>
-    <search :filter="filterProducts" :catalog="catalogProducts"></search>
 </div>
 <script src="https://use.fontawesome.com/7634060d91.js"></script>
 <script src="js/components.js"></script>
