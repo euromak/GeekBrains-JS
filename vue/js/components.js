@@ -25,3 +25,7 @@ Vue.component('search', {
     '</form>',
 
 });
+
+/**
+ * Компонент
+ */
