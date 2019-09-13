@@ -1,5 +1,5 @@
 const fs = require('fs');
-const cart = require('cart');
+const cart = require('./cart');
 
 const action = {
     add: cart.add,
@@ -12,7 +12,7 @@ const handler = (req, res, action, file) => {
           res.sendStatus(404, JSON.stringify({result: 0, text: err}));
       } else {
           const newCart = actions[action](JSON.parse(data), req);
-          fs.readFile(file, newCart, (err) => {
+          fs.writeFile(file, newCart, (err) => {
               if(err) {
                   res.send('{"result": 0}');
               } else {
