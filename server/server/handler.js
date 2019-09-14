@@ -1,7 +1,7 @@
 const fs = require('fs');
 const cart = require('./cart');
 
-const action = {
+const actions = {
     add: cart.add,
     change: cart.change,
 };
@@ -22,3 +22,5 @@ const handler = (req, res, action, file) => {
       }
   })
 };
+
+module.exports = handler;
